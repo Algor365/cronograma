@@ -1,3 +1,5 @@
+importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
+
 const CACHE_NAME = "calendario-ieww-v20260707";
 
 const FILES_TO_CACHE = [
@@ -11,7 +13,6 @@ const FILES_TO_CACHE = [
   "./cronograma.xlsx",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
-  "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"
 ];
 
 self.addEventListener("install", event => {
