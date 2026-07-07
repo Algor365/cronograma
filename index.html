@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#120018">
+  <meta name="description" content="Sistema IEWW para consulta de turmas, disciplinas e avaliações.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Calendário IEWW">
+
+  <title>Consulta de Turmas e Avaliações</title>
+
+  <link rel="manifest" href="./manifest.json?v=20260707">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./style.css?v=20260707">
+
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <p class="tag">Sistema de consulta IEWW</p>
+      <h1>Consulta de Turmas e Avaliações</h1>
+      <p class="subtitulo">Consulte turmas, disciplinas, unidades e datas de avaliação.</p>
+    </section>
+
+    <section class="painel-notificacao">
+      <div>
+        <p class="resultado-titulo">Notificações do calendário</p>
+        <p class="texto-notificacao">Ative as notificações para receber avisos importantes do calendário IEWW.</p>
+      </div>
+      <button id="ativarNotificacoes" type="button">Ativar notificações</button>
+    </section>
+
+    <section class="painel">
+      <div class="formulario">
+        <label>
+          Mês
+          <select id="mes">
+            <option value="">Todos os meses</option>
+          </select>
+        </label>
+
+        <label class="campo-turma-label">
+          Código da turma
+
+          <div class="campo-turma">
+            <input
+              id="turma"
+              type="text"
+              placeholder="Digite ou selecione a turma"
+              autocomplete="off"
+            >
+
+            <button type="button" id="limparTurma" class="limpar-turma">
+              ×
+            </button>
+
+            <div id="listaTurmas" class="lista-turmas escondido"></div>
+          </div>
+        </label>
+
+        <label>
+          Disciplina
+          <select id="disciplina">
+            <option value="">Todas as disciplinas</option>
+          </select>
+        </label>
+
+        <label>
+          Unidade
+          <select id="unidade">
+            <option value="">Todas as unidades</option>
+          </select>
+        </label>
+
+        <button id="limpar" type="button">Nova consulta</button>
+      </div>
+
+      <div class="resultado">
+        <p class="resultado-titulo">Resultado da consulta</p>
+        <div id="estadoInicial" class="estado">Carregando planilha...</div>
+        <div id="listaResultado" class="lista escondido"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+  <script src="./pwa.js?v=20260707"></script>
+  <script src="./onesignal-config.js?v=20260707"></script>
+  <script src="./script.js?v=20260707"></script>
+</body>
+</html>
