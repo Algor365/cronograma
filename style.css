@@ -355,3 +355,17 @@ select.pratica-clinica-selecionada {
     max-width: 100%;
   }
 }
+.painel-notificacao {
+    transition: all .35s ease;
+}
+
+.painel-notificacao.oculto {
+    opacity: 0;
+    transform: translateY(-15px);
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    border: 0;
+}

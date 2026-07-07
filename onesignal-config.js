@@ -8,16 +8,26 @@ OneSignalDeferred.push(async function (OneSignal) {
   });
 
   const botao = document.getElementById("ativarNotificacoes");
+  const painel = document.getElementById("painelNotificacoes");
 
-  if (botao) {
+  if (painel && Notification.permission === "granted") {
+    painel.remove();
+    return;
+  }
+
+  if (botao && painel) {
     botao.addEventListener("click", async () => {
       try {
         await OneSignal.Notifications.requestPermission();
 
         if (Notification.permission === "granted") {
-          botao.textContent = "Notificações ativadas";
-          botao.disabled = true;
+          painel.classList.add("oculto");
+
+          setTimeout(() => {
+            painel.remove();
+          }, 350);
         }
+
       } catch (erro) {
         console.warn("Erro ao solicitar permissão:", erro);
         alert("Não foi possível ativar as notificações neste navegador.");
