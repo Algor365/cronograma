@@ -1,6 +1,6 @@
 importScripts("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js");
 
-const CACHE_NAME = "calendario-ieww-v20260707";
+const CACHE_NAME = "calendario-ieww-v20260707-2";
 
 const FILES_TO_CACHE = [
   "./",

@@ -1,5 +1,172 @@
 let dados = [];
 
+const MATRIZ_CURRICULAR = [
+
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Legislação Estética",
+    chave: "legislacao-estetica"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Prescrição Aplicada à Estética",
+    chave: "prescricao-aplicada-estetica"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Biossegurança e Primeiros Socorros Aplicados à Saúde Estética",
+    chave: "biosseguranca-primeiros-socorros"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Patologia e Imunologia Aplicada à Estética",
+    chave: "patologia-imunologia"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Cosmetologia Avançada",
+    chave: "cosmetologia-avancada"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Farmacologia dos Injetáveis Corporais e Faciais",
+    chave: "farmacologia-injetaveis"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Multidisciplinaridade na Estética e Saúde",
+    chave: "multidisciplinaridade"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Anatomofisiologia da Cabeça e Pescoço",
+    chave: "anatomofisiologia-cabeca-pescoco"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Anatomofisiologia do Sistema Tegumentar e Endócrino",
+    chave: "anatomofisiologia-tegumentar-endocrino"
+  },
+  {
+    grupo: "Aulas síncronas",
+    titulo: "Ciência Estética",
+    chave: "ciencia-estetica"
+  },
+    {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Eletroterapia Aplicada à Estética - Teórica",
+    chave: "eletroterapia-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Eletroterapia Aplicada à Estética - Prática",
+    chave: "eletroterapia-pratica"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Tricologia e Terapias Capilares Avançadas - Teórica",
+    chave: "tricologia-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Tricologia e Terapias Capilares Avançadas - Prática",
+    chave: "tricologia-pratica"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Inovação e Tecnologias em Harmonização - Teórica",
+    chave: "inovacao-harmonizacao-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Inovação e Tecnologias em Harmonização - Prática",
+    chave: "inovacao-harmonizacao-pratica"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimentos Intradérmicos e Intramusculares - Teórica",
+    chave: "intradermicos-intramusculares-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimentos Intradérmicos e Intramusculares - Prática I",
+    chave: "intradermicos-intramusculares-pratica-1"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimentos Intradérmicos e Intramusculares - Prática II",
+    chave: "intradermicos-intramusculares-pratica-2"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Toxina Botulínica - Teórica",
+    chave: "toxina-botulinica-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Toxina Botulínica - Prática",
+    chave: "toxina-botulinica-pratica"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Bioestimuladores - Teórica",
+    chave: "bioestimuladores-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Bioestimuladores - Prática",
+    chave: "bioestimuladores-pratica"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Preenchedores - Teórica",
+    chave: "preenchedores-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Preenchedores - Prática",
+    chave: "preenchedores-pratica"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Fios de Sustentação - Teórica",
+    chave: "fios-sustentacao-teorica"
+  },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimento Injetável Estético: Fios de Sustentação - Prática",
+    chave: "fios-sustentacao-pratica"
+  },
+
+  {
+    grupo: "Práticas Clinicas / Avançadas",
+    titulo: "Prática Clínica: Toxina Botulínica",
+    chave: "pratica-clinica-toxina"
+  },
+  {
+    grupo: "Práticas Clinicas / Avançadas",
+    titulo: "Prática Clínica: Bioestimuladores",
+    chave: "pratica-clinica-bioestimuladores"
+  },
+  {
+    grupo: "Práticas Clinicas / Avançadas",
+    titulo: "Prática Clínica: Preenchedores",
+    chave: "pratica-clinica-preenchedores"
+  },
+  {
+    grupo: "Práticas Clinicas / Avançadas",
+    titulo: "Prática Clínica: Fios de Sustentação",
+    chave: "pratica-clinica-fios"
+  }
+];
+
 const selects = {
   mes: document.getElementById("mes"),
   turma: document.getElementById("turma"),
@@ -22,13 +189,13 @@ function normalizar(texto) {
 }
 
 function limparValor(valor) {
-  if (valor === undefined || valor === null) return "";
-  return String(valor).trim().replace(/\s+/g, " ");
-}
+  if (valor === undefined || valor === null) {
+    return "";
+  }
 
-function chaveDisciplina(disciplina) {
-  return normalizar(disciplina)
-    .replace(/biostimulador/g, "bioestimulador");
+  return String(valor)
+    .trim()
+    .replace(/\s+/g, " ");
 }
 
 function nomeDisciplinaPadrao(disciplina) {
@@ -36,76 +203,182 @@ function nomeDisciplinaPadrao(disciplina) {
     .replace(/Biostimulador/gi, "Bioestimulador");
 }
 
-function nomeCurtoDisciplina(nomeCompleto) {
-  const nome = nomeDisciplinaPadrao(nomeCompleto);
-  const n = normalizar(nome);
+function chavesCurricularesDaDisciplina(disciplina) {
+  const n = normalizar(disciplina)
+    .replace(/biostimulador/g, "bioestimulador");
 
-  let tipo = "";
-  // Práticas Clínicas
-if (
-    n.includes("pratica clinica") &&
-    n.includes("toxina botulinica")
-) {
-    return "Prática Clínica: Toxina Botulínica";
-}
+  const chaves = [];
 
-if (
-    n.includes("pratica clinica") &&
-    n.includes("bioestimulador")
-) {
-    return "Prática Clínica: Bioestimuladores";
-}
+  const ehTeorica =
+    n.includes("teorica") ||
+    n.includes("teoria");
 
-if (
-    n.includes("pratica clinica") &&
-    (
-        n.includes("preenchimento facial") ||
-        n.includes("preenchedor")
-    )
-) {
-    return "Prática Clínica: Preenchedores";
-}
+  const ehPraticaClinica =
+    n.includes("pratica clinica");
 
-if (
-    n.includes("pratica clinica") &&
-    n.includes("fios de sustentacao")
-) {
-    return "Prática Clínica: Fios de Sustentação";
-}
-  if (n.includes("teoria")) tipo = " - Teórica";
-  if (n.includes("pratica")) tipo = " - Prática";
+  const ehPratica1 =
+    n.includes("pratica i") &&
+    !n.includes("pratica ii");
 
-  if (n.includes("eletroterapia")) return "Eletroterapia" + tipo;
-  if (n.includes("farmacologia")) return "Farmacologia" + tipo;
-  if (n.includes("fios de sustentacao")) return "Fios de Sustentação" + tipo;
-  if (n.includes("preenchimento facial")) return "Preenchimento Facial" + tipo;
-  if (n.includes("bioestimulador")) return "Bioestimulador" + tipo;
-  if (n.includes("toxina botulinica")) return "Toxina Botulínica" + tipo;
-  if (n.includes("tricologia")) return "Tricologia" + tipo;
+  const ehPratica2 =
+    n.includes("pratica ii");
 
- if (
+  const ehPraticaComum =
+    n.includes("pratica") &&
+    !ehPraticaClinica &&
+    !ehPratica1 &&
+    !ehPratica2;
+
+  if (n.includes("legislacao estetica")) {
+    chaves.push("legislacao-estetica");
+  }
+
+  if (n.includes("prescricao aplicada")) {
+    chaves.push("prescricao-aplicada-estetica");
+  }
+
+  if (
+    n.includes("biosseguranca") ||
+    n.includes("primeiros socorros")
+  ) {
+    chaves.push("biosseguranca-primeiros-socorros");
+  }
+
+  if (
+    n.includes("patologia") ||
+    n.includes("imunologia")
+  ) {
+    chaves.push("patologia-imunologia");
+  }
+
+  if (n.includes("cosmetologia")) {
+    chaves.push("cosmetologia-avancada");
+  }
+
+  if (n.includes("farmacologia")) {
+    chaves.push("farmacologia-injetaveis");
+  }
+
+  if (n.includes("multidisciplinaridade")) {
+    chaves.push("multidisciplinaridade");
+  }
+
+  if (
+    n.includes("cabeca") &&
+    n.includes("pescoco")
+  ) {
+    chaves.push("anatomofisiologia-cabeca-pescoco");
+  }
+
+  if (
+    n.includes("tegumentar") ||
+    n.includes("endocrino")
+  ) {
+    chaves.push("anatomofisiologia-tegumentar-endocrino");
+  }
+
+  if (n.includes("ciencia estetica")) {
+    chaves.push("ciencia-estetica");
+  }
+
+  if (n.includes("eletroterapia")) {
+    if (ehTeorica) {
+      chaves.push("eletroterapia-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("eletroterapia-pratica");
+    }
+  }
+
+  if (
+    n.includes("tricologia") ||
+    n.includes("terapia capilar")
+  ) {
+    if (ehTeorica) {
+      chaves.push("tricologia-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("tricologia-pratica");
+    }
+  }
+
+  if (
+    n.includes("inovacao") &&
+    n.includes("harmonizacao")
+  ) {
+    if (ehTeorica) {
+      chaves.push("inovacao-harmonizacao-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("inovacao-harmonizacao-pratica");
+    }
+  }
+
+  if (
     n.includes("intradermicos") ||
     n.includes("intramusculares")
-) {
-    let complemento = "";
+  ) {
+    if (ehPratica2) {
+      chaves.push("intradermicos-intramusculares-pratica-2");
+    } else if (ehPratica1) {
+      chaves.push("intradermicos-intramusculares-pratica-1");
+    } else if (ehTeorica) {
+      chaves.push("intradermicos-intramusculares-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("intradermicos-intramusculares-pratica-1");
+    }
+  }
 
-    if (n.includes("pratica i")) complemento = " - Prática I";
-    else if (n.includes("pratica ii")) complemento = " - Prática II";
-    else if (n.includes("teoria")) complemento = " - Teórica";
-    else if (n.includes("pratica")) complemento = " - Prática";
+  if (n.includes("toxina botulinica")) {
+    if (ehPraticaClinica) {
+      chaves.push("pratica-clinica-toxina");
+    } else if (ehTeorica) {
+      chaves.push("toxina-botulinica-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("toxina-botulinica-pratica");
+    }
+  }
 
-    return "Intradérmicos e Intramusculares" + complemento;
+  if (n.includes("bioestimulador")) {
+    if (ehPraticaClinica) {
+      chaves.push("pratica-clinica-bioestimuladores");
+    } else if (ehTeorica) {
+      chaves.push("bioestimuladores-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("bioestimuladores-pratica");
+    }
+  }
+
+  if (
+    n.includes("preenchimento") ||
+    n.includes("preenchedor")
+  ) {
+    if (ehPraticaClinica) {
+      chaves.push("pratica-clinica-preenchedores");
+    } else if (ehTeorica) {
+      chaves.push("preenchedores-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("preenchedores-pratica");
+    }
+  }
+
+  if (n.includes("fios de sustentacao")) {
+    if (ehPraticaClinica) {
+      chaves.push("pratica-clinica-fios");
+    } else if (ehTeorica) {
+      chaves.push("fios-sustentacao-teorica");
+    } else if (ehPraticaComum) {
+      chaves.push("fios-sustentacao-pratica");
+    }
+  }
+
+  if (!chaves.length) {
+    chaves.push(normalizar(disciplina));
+  }
+
+  return [...new Set(chaves)];
 }
 
-  return nome;
-}
-function ordemTipoDisciplina(texto) {
-  const n = normalizar(texto);
-
-  if (n.includes("teorica") || n.includes("teoria")) return 1;
-  if (n.includes("pratica")) return 2;
-
-  return 3;
+function disciplinaPertenceAMatriz(disciplina, chaveMatriz) {
+  return chavesCurricularesDaDisciplina(disciplina)
+    .includes(chaveMatriz);
 }
 
 function lerPlanilha(workbook) {
@@ -121,22 +394,47 @@ function lerPlanilha(workbook) {
 
   linhas.forEach(linha => {
     registros.push({
-      mes: limparValor(linha["MÊS"] || linha["MES"]),
-      dia: limparValor(linha["DIA"]),
-      turma: limparValor(linha["TURMA"]),
-      disciplina: nomeDisciplinaPadrao(linha["DISCIPLINA"]),
-      unidade: limparValor(linha["UNIDADE"]),
+      mes: limparValor(
+        linha["MÊS"] ||
+        linha["MES"]
+      ),
+
+      dia: limparValor(
+        linha["DIA"]
+      ),
+
+      turma: limparValor(
+        linha["TURMA"]
+      ),
+
+      disciplina: nomeDisciplinaPadrao(
+        linha["DISCIPLINA"]
+      ),
+
+      unidade: limparValor(
+        linha["UNIDADE"]
+      ),
+
       avaliacaoRegular: limparValor(
-        linha["AVALIAÇÃO REGULAR"] || linha["AVALIACAO REGULAR"]
+        linha["AVALIAÇÃO REGULAR"] ||
+        linha["AVALIACAO REGULAR"]
       ),
+
       avaliacaoSubstitutiva: limparValor(
-        linha["AVALIAÇÃO SUBSTITUTIVA"] || linha["AVALIACAO SUBSTITUTIVA"]
+        linha["AVALIAÇÃO SUBSTITUTIVA"] ||
+        linha["AVALIACAO SUBSTITUTIVA"]
       ),
-      origem: limparValor(linha["ABA_ORIGEM"])
+
+      origem: limparValor(
+        linha["ABA_ORIGEM"]
+      )
     });
   });
 
-  return registros.filter(item => item.turma || item.disciplina);
+  return registros.filter(item =>
+    item.turma ||
+    item.disciplina
+  );
 }
 
 function ordemMes(mes) {
@@ -158,108 +456,6 @@ function ordemMes(mes) {
   return meses[normalizar(mes)] || 99;
 }
 
-function ehListaDeMeses(lista) {
-  return lista.every(item => ordemMes(item) !== 99);
-}
-
-function unicos(lista) {
-  const valores = [...new Set(lista.filter(Boolean))];
-
-  if (ehListaDeMeses(valores)) {
-    return valores.sort((a, b) => ordemMes(a) - ordemMes(b));
-  }
-
-  return valores.sort((a, b) =>
-    String(a).localeCompare(String(b), "pt-BR")
-  );
-}
-
-function disciplinasUnicas(lista) {
-  const mapa = new Map();
-
-  lista.forEach(item => {
-    const chave = chaveDisciplina(item.disciplina);
-    if (!chave) return;
-
-    if (!mapa.has(chave)) {
-      mapa.set(chave, nomeCurtoDisciplina(item.disciplina));
-    }
-  });
-
-  return [...mapa.entries()]
-    .map(([value, text]) => ({ value, text }))
-    .sort((a, b) => {
-
-    const praticaA = a.text.startsWith("Prática Clínica:");
-    const praticaB = b.text.startsWith("Prática Clínica:");
-
-    // Práticas Clínicas sempre por último
-    if (praticaA && !praticaB) return 1;
-    if (!praticaA && praticaB) return -1;
-
-    // Remove o tipo para comparar o nome
-    const nomeA = a.text
-        .replace("Prática Clínica: ", "")
-        .replace(" - Teórica", "")
-        .replace(" - Prática I", "")
-        .replace(" - Prática II", "")
-        .replace(" - Prática", "");
-
-    const nomeB = b.text
-        .replace("Prática Clínica: ", "")
-        .replace(" - Teórica", "")
-        .replace(" - Prática I", "")
-        .replace(" - Prática II", "")
-        .replace(" - Prática", "");
-
-    const ordemNome = nomeA.localeCompare(nomeB, "pt-BR");
-
-    if (ordemNome !== 0) return ordemNome;
-
-    return ordemTipoDisciplina(a.text) - ordemTipoDisciplina(b.text);
-});
-}
-
-function preencherSelect(select, valores, textoPadrao) {
-  const valorAtual = select.value;
-
-  select.innerHTML = `<option value="">${textoPadrao}</option>`;
-
-  valores.forEach(valor => {
-    const option = document.createElement("option");
-    option.value = valor;
-    option.textContent = valor;
-    select.appendChild(option);
-  });
-
-  if ([...select.options].some(option => option.value === valorAtual)) {
-    select.value = valorAtual;
-  }
-}
-
-function preencherSelectDisciplina(valores) {
-  const valorAtual = selects.disciplina.value;
-
-  selects.disciplina.innerHTML =
-    `<option value="">Todas as disciplinas</option>`;
-
-  valores.forEach(item => {
-    const option = document.createElement("option");
-option.value = item.value;
-option.textContent = item.text;
-
-if (item.text.startsWith("Prática Clínica:")) {
-    option.classList.add("pratica-clinica");
-}
-
-selects.disciplina.appendChild(option);
-  });
-
-  if ([...selects.disciplina.options].some(option => option.value === valorAtual)) {
-    selects.disciplina.value = valorAtual;
-  }
-}
-
 function numeroMes(mes) {
   const meses = {
     janeiro: "01",
@@ -279,6 +475,121 @@ function numeroMes(mes) {
   return meses[normalizar(mes)] || "";
 }
 
+function ehListaDeMeses(lista) {
+  return lista.every(item =>
+    ordemMes(item) !== 99
+  );
+}
+
+function unicos(lista) {
+  const valores = [
+    ...new Set(lista.filter(Boolean))
+  ];
+
+  if (ehListaDeMeses(valores)) {
+    return valores.sort(
+      (a, b) => ordemMes(a) - ordemMes(b)
+    );
+  }
+
+  return valores.sort((a, b) =>
+    String(a).localeCompare(
+      String(b),
+      "pt-BR"
+    )
+  );
+}
+
+function disciplinasUnicas() {
+  return MATRIZ_CURRICULAR.map(item => ({
+    value: item.chave,
+    text: item.titulo,
+    grupo: item.grupo
+  }));
+}
+
+function preencherSelect(
+  select,
+  valores,
+  textoPadrao
+) {
+  const valorAtual = select.value;
+
+  select.innerHTML =
+    `<option value="">${textoPadrao}</option>`;
+
+  valores.forEach(valor => {
+    const option =
+      document.createElement("option");
+
+    option.value = valor;
+    option.textContent = valor;
+
+    select.appendChild(option);
+  });
+
+  const valorAindaExiste =
+    [...select.options].some(option =>
+      option.value === valorAtual
+    );
+
+  if (valorAindaExiste) {
+    select.value = valorAtual;
+  }
+}
+
+function preencherSelectDisciplina(valores) {
+  const valorAtual =
+    selects.disciplina.value;
+
+  selects.disciplina.innerHTML =
+    `<option value="">Todas as disciplinas</option>`;
+
+  const grupos = new Map();
+
+  valores.forEach(item => {
+    const nomeGrupo =
+      item.grupo || "Disciplinas";
+
+    if (!grupos.has(nomeGrupo)) {
+      const optgroup =
+        document.createElement("optgroup");
+
+      optgroup.label = nomeGrupo;
+
+      grupos.set(nomeGrupo, optgroup);
+      selects.disciplina.appendChild(optgroup);
+    }
+
+    const option =
+      document.createElement("option");
+
+    option.value = item.value;
+    option.textContent = item.text;
+
+    if (
+      item.text.startsWith("Prática Clínica:")
+    ) {
+      option.classList.add(
+        "pratica-clinica"
+      );
+    }
+
+    grupos.get(nomeGrupo)
+      .appendChild(option);
+  });
+
+  const valorAindaExiste =
+    [...selects.disciplina.options].some(
+      option => option.value === valorAtual
+    );
+
+  if (valorAindaExiste) {
+    selects.disciplina.value =
+      valorAtual;
+  }
+}
+
 function dataDaAulaValida(item) {
   const meses = {
     janeiro: 0,
@@ -289,145 +600,191 @@ function dataDaAulaValida(item) {
     junho: 5,
     julho: 6,
     agosto: 7,
-        setembro: 8,
+    setembro: 8,
     outubro: 9,
     novembro: 10,
     dezembro: 11
   };
 
-  const mes = meses[normalizar(item.mes)];
-  const dia = parseInt(item.dia);
+  const mes =
+    meses[normalizar(item.mes)];
 
-  if (mes === undefined || !dia) return true;
+  const dia =
+    Number.parseInt(item.dia, 10);
+
+  if (
+    mes === undefined ||
+    !dia
+  ) {
+    return true;
+  }
 
   const hoje = new Date();
   hoje.setHours(0, 0, 0, 0);
 
-  const dataAula = new Date(2026, mes, dia);
+  const dataAula =
+    new Date(2026, mes, dia);
+
   dataAula.setHours(0, 0, 0, 0);
 
   return dataAula >= hoje;
 }
 
 function dadosAtivos() {
-  return dados.filter(item => dataDaAulaValida(item));
+  return dados.filter(item =>
+    dataDaAulaValida(item)
+  );
 }
 
 function dataFormatada(item) {
   const mes = numeroMes(item.mes);
 
-  if (!mes) return item.dia || "-";
+  if (!mes) {
+    return item.dia || "-";
+  }
 
   return `${String(item.dia).padStart(2, "0")}/${mes}/2026`;
 }
 
 function ehPraticaClinica(item) {
-  const n = normalizar(item.disciplina);
-
-  return (
-    n.includes("pratica clinica") &&
-    (
-      n.includes("preenchimento facial") ||
-      n.includes("fios de sustentacao")
-    ) &&
-    item.avaliacaoRegular === "Prática Clínica"
-  );
+  return normalizar(item.disciplina)
+    .includes("pratica clinica");
 }
 
 function turmasDisponiveis() {
   const mes = selects.mes.value;
-  const disciplina = selects.disciplina.value;
-  const unidade = selects.unidade.value;
+  const disciplina =
+    selects.disciplina.value;
+  const unidade =
+    selects.unidade.value;
 
   let lista = dadosAtivos();
 
-  if (mes) lista = lista.filter(item => item.mes === mes);
-
-  if (disciplina) {
+  if (mes) {
     lista = lista.filter(item =>
-      chaveDisciplina(item.disciplina) === disciplina
+      item.mes === mes
     );
   }
 
-  if (unidade) lista = lista.filter(item => item.unidade === unidade);
+  if (disciplina) {
+    lista = lista.filter(item =>
+      disciplinaPertenceAMatriz(
+        item.disciplina,
+        disciplina
+      )
+    );
+  }
 
-  return unicos(lista.map(item => item.turma));
+  if (unidade) {
+    lista = lista.filter(item =>
+      item.unidade === unidade
+    );
+  }
+
+  return unicos(
+    lista.map(item => item.turma)
+  );
 }
 
 function renderizarListaTurmas() {
-  const busca = normalizar(selects.turma.value);
+  const busca =
+    normalizar(selects.turma.value);
 
-  const turmas = turmasDisponiveis().filter(turma =>
-    normalizar(turma).includes(busca)
-  );
+  const turmas =
+    turmasDisponiveis().filter(turma =>
+      normalizar(turma).includes(busca)
+    );
 
   listaTurmas.innerHTML = "";
 
   if (!turmas.length) {
-    const vazio = document.createElement("div");
-    vazio.className = "item-turma vazio";
-    vazio.textContent = "Nenhuma turma encontrada";
+    const vazio =
+      document.createElement("div");
+
+    vazio.className =
+      "item-turma vazio";
+
+    vazio.textContent =
+      "Nenhuma turma encontrada";
+
     listaTurmas.appendChild(vazio);
     listaTurmas.classList.remove("escondido");
+
     return;
   }
 
   turmas.forEach(turma => {
-    const item = document.createElement("button");
+    const item =
+      document.createElement("button");
+
     item.type = "button";
     item.className = "item-turma";
     item.textContent = turma;
 
-    item.addEventListener("mousedown", event => {
-      event.preventDefault();
+    item.addEventListener(
+      "mousedown",
+      event => {
+        event.preventDefault();
 
-      selects.turma.value = turma;
-      listaTurmas.classList.add("escondido");
+        selects.turma.value = turma;
 
-      atualizarFiltros();
-      consultar();
-    });
+        listaTurmas.classList.add(
+          "escondido"
+        );
+
+        atualizarFiltros();
+        consultar();
+      }
+    );
 
     listaTurmas.appendChild(item);
   });
 
-  listaTurmas.classList.remove("escondido");
+  listaTurmas.classList.remove(
+    "escondido"
+  );
 }
-
 function atualizarFiltros() {
   const base = dadosAtivos();
 
-  const mesAtual = selects.mes.value;
-  const turmaAtual = selects.turma.value;
-  const disciplinaAtual = selects.disciplina.value;
-  const unidadeAtual = selects.unidade.value;
+  const mesAtual =
+    selects.mes.value;
 
-  let listaSemDisciplina = base;
+  const turmaAtual =
+    selects.turma.value;
+
+  const disciplinaAtual =
+    selects.disciplina.value;
+
+  const unidadeAtual =
+    selects.unidade.value;
+
   let listaSemUnidade = base;
 
   if (mesAtual) {
-    listaSemDisciplina = listaSemDisciplina.filter(item => item.mes === mesAtual);
-    listaSemUnidade = listaSemUnidade.filter(item => item.mes === mesAtual);
+    listaSemUnidade =
+      listaSemUnidade.filter(item =>
+        item.mes === mesAtual
+      );
   }
 
   if (turmaAtual) {
-    listaSemDisciplina = listaSemDisciplina.filter(item =>
-      normalizar(item.turma).includes(normalizar(turmaAtual))
-    );
-
-    listaSemUnidade = listaSemUnidade.filter(item =>
-      normalizar(item.turma).includes(normalizar(turmaAtual))
-    );
-  }
-
-  if (unidadeAtual) {
-    listaSemDisciplina = listaSemDisciplina.filter(item => item.unidade === unidadeAtual);
+    listaSemUnidade =
+      listaSemUnidade.filter(item =>
+        normalizar(item.turma).includes(
+          normalizar(turmaAtual)
+        )
+      );
   }
 
   if (disciplinaAtual) {
-    listaSemUnidade = listaSemUnidade.filter(item =>
-      chaveDisciplina(item.disciplina) === disciplinaAtual
-    );
+    listaSemUnidade =
+      listaSemUnidade.filter(item =>
+        disciplinaPertenceAMatriz(
+          item.disciplina,
+          disciplinaAtual
+        )
+      );
   }
 
   preencherSelect(
@@ -437,92 +794,327 @@ function atualizarFiltros() {
   );
 
   preencherSelectDisciplina(
-    disciplinasUnicas(listaSemDisciplina)
+    disciplinasUnicas()
   );
 
   preencherSelect(
     selects.unidade,
-    unicos(listaSemUnidade.map(item => item.unidade)),
+    unicos(
+      listaSemUnidade.map(
+        item => item.unidade
+      )
+    ),
     "Todas as unidades"
   );
 
   selects.mes.value = mesAtual;
   selects.turma.value = turmaAtual;
-  selects.disciplina.value = disciplinaAtual;
-  selects.unidade.value = unidadeAtual;
+  selects.disciplina.value =
+    disciplinaAtual;
+  selects.unidade.value =
+    unidadeAtual;
+
   destacarDisciplinaSelecionada();
 }
 
 function filtrarDados() {
-  const mes = selects.mes.value;
-  const turma = normalizar(selects.turma.value);
-  const disciplina = selects.disciplina.value;
-  const unidade = selects.unidade.value;
+  const mes =
+    selects.mes.value;
+
+  const turma =
+    normalizar(selects.turma.value);
+
+  const disciplina =
+    selects.disciplina.value;
+
+  const unidade =
+    selects.unidade.value;
 
   return dadosAtivos().filter(item => {
+    const correspondeMes =
+      !mes ||
+      item.mes === mes;
+
+    const correspondeTurma =
+      !turma ||
+      normalizar(item.turma)
+        .includes(turma);
+
+    const correspondeDisciplina =
+      !disciplina ||
+      disciplinaPertenceAMatriz(
+        item.disciplina,
+        disciplina
+      );
+
+    const correspondeUnidade =
+      !unidade ||
+      item.unidade === unidade;
+
     return (
-      (!mes || item.mes === mes) &&
-      (!turma || normalizar(item.turma).includes(turma)) &&
-      (!disciplina || chaveDisciplina(item.disciplina) === disciplina) &&
-      (!unidade || item.unidade === unidade)
+      correspondeMes &&
+      correspondeTurma &&
+      correspondeDisciplina &&
+      correspondeUnidade
     );
   });
 }
 
-function consultar() {
-  const lista = filtrarDados();
+function escaparHtml(valor) {
+  return String(valor ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 
-  if (!lista.length) {
-    estadoInicial.textContent = "Nenhum resultado encontrado.";
-    estadoInicial.classList.remove("escondido");
-    listaResultado.classList.add("escondido");
+function ordenarAulas(lista) {
+  return [...lista].sort((a, b) => {
+    const diferencaMes =
+      ordemMes(a.mes) -
+      ordemMes(b.mes);
+
+    if (diferencaMes !== 0) {
+      return diferencaMes;
+    }
+
+    const diaA =
+      Number.parseInt(a.dia, 10) || 99;
+
+    const diaB =
+      Number.parseInt(b.dia, 10) || 99;
+
+    return diaA - diaB;
+  });
+}
+
+function cardSemData(disciplina) {
+  return `
+    <article class="card card-sem-data">
+      <h2>
+        ${escaparHtml(disciplina.titulo)}
+      </h2>
+
+      <div class="estado">
+        Aguarde. Nosso cronograma é atualizado semestralmente e, no momento, ainda não possuímos uma data definida para esta disciplina.
+.
+      </div>
+    </article>
+  `;
+}
+
+function cardComData(
+  item,
+  tituloMatriz
+) {
+  const pratica =
+    ehPraticaClinica(item);
+
+  const avaliacaoRegular = pratica
+    ? "Prática Clínica"
+    : item.avaliacaoRegular ||
+      "Não informado";
+
+  const avaliacaoSubstitutiva = pratica
+    ? "Prática Clínica"
+    : item.avaliacaoSubstitutiva ||
+      "-";
+
+  return `
+    <article class="card">
+      <h2>
+        ${escaparHtml(tituloMatriz)}
+      </h2>
+
+      <div class="grid">
+        <div>
+          <span>Mês</span>
+
+          <strong>
+            ${escaparHtml(item.mes || "-")}
+          </strong>
+        </div>
+
+        <div>
+          <span>Data da aula</span>
+
+          <strong>
+            ${escaparHtml(
+              dataFormatada(item)
+            )}
+          </strong>
+        </div>
+
+        <div>
+          <span>Código da turma</span>
+
+          <strong>
+            ${escaparHtml(
+              item.turma || "-"
+            )}
+          </strong>
+        </div>
+
+        <div>
+          <span>Unidade</span>
+
+          <strong>
+            ${escaparHtml(
+              item.unidade || "-"
+            )}
+          </strong>
+        </div>
+
+        <div class="${
+          pratica ? "sem-prova" : ""
+        }">
+          <span>Avaliação regular</span>
+
+          <strong>
+            ${escaparHtml(
+              avaliacaoRegular
+            )}
+          </strong>
+        </div>
+
+        <div class="${
+          pratica ? "sem-prova" : ""
+        }">
+          <span>
+            Avaliação substitutiva
+          </span>
+
+          <strong>
+            ${escaparHtml(
+              avaliacaoSubstitutiva
+            )}
+          </strong>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+function consultar() {
+  const listaFiltrada = ordenarAulas(
+    filtrarDados()
+  );
+
+  const disciplinaSelecionada =
+    selects.disciplina.value;
+
+  /*
+   * Quando nenhuma disciplina estiver selecionada:
+   * mostra somente as aulas que possuem datas na planilha.
+   */
+  if (!disciplinaSelecionada) {
+    if (!listaFiltrada.length) {
+      listaResultado.innerHTML = "";
+
+      listaResultado.classList.add(
+        "escondido"
+      );
+
+      estadoInicial.textContent =
+        "Nenhuma aula encontrada para os filtros selecionados.";
+
+      estadoInicial.classList.remove(
+        "escondido"
+      );
+
+      return;
+    }
+
+    const html = listaFiltrada.map(item => {
+      const disciplinaMatriz =
+        MATRIZ_CURRICULAR.find(disciplina =>
+          disciplinaPertenceAMatriz(
+            item.disciplina,
+            disciplina.chave
+          )
+        );
+
+      const titulo =
+        disciplinaMatriz?.titulo ||
+        item.disciplina ||
+        "Disciplina";
+
+      return cardComData(
+        item,
+        titulo
+      );
+    }).join("");
+
+    estadoInicial.classList.add(
+      "escondido"
+    );
+
+    listaResultado.classList.remove(
+      "escondido"
+    );
+
+    listaResultado.innerHTML = html;
+
     return;
   }
 
-  estadoInicial.classList.add("escondido");
-  listaResultado.classList.remove("escondido");
+  /*
+   * Quando uma disciplina específica estiver selecionada:
+   * mostra as datas dela ou o aviso de que ainda não possui data.
+   */
+  const disciplinaMatriz =
+    MATRIZ_CURRICULAR.find(item =>
+      item.chave === disciplinaSelecionada
+    );
 
-  listaResultado.innerHTML = lista.map(item => {
-    const pratica = ehPraticaClinica(item);
+  if (!disciplinaMatriz) {
+    estadoInicial.textContent =
+      "Disciplina não encontrada.";
 
-    return `
-      <article class="card">
-        <h2>${item.disciplina || "-"}</h2>
+    estadoInicial.classList.remove(
+      "escondido"
+    );
 
-        <div class="grid">
-          <div>
-            <span>Mês</span>
-            <strong>${item.mes || "-"}</strong>
-          </div>
+    listaResultado.classList.add(
+      "escondido"
+    );
 
-          <div>
-            <span>Data da aula</span>
-            <strong>${dataFormatada(item)}</strong>
-          </div>
+    return;
+  }
 
-          <div>
-            <span>Código da turma</span>
-            <strong>${item.turma || "-"}</strong>
-          </div>
+  const aulasDaDisciplina =
+    listaFiltrada.filter(item =>
+      disciplinaPertenceAMatriz(
+        item.disciplina,
+        disciplinaSelecionada
+      )
+    );
 
-          <div>
-            <span>Unidade</span>
-            <strong>${item.unidade || "-"}</strong>
-          </div>
+  let html = "";
 
-          <div class="${pratica ? "sem-prova" : ""}">
-            <span>Avaliação regular</span>
-            <strong>${pratica ? "Não possui data de prova" : item.avaliacaoRegular || "Não informado"}</strong>
-          </div>
+  if (!aulasDaDisciplina.length) {
+    html = cardSemData(
+      disciplinaMatriz
+    );
+  } else {
+    html = aulasDaDisciplina.map(item =>
+      cardComData(
+        item,
+        disciplinaMatriz.titulo
+      )
+    ).join("");
+  }
 
-          <div class="${pratica ? "sem-prova" : ""}">
-            <span>Avaliação substitutiva</span>
-            <strong>${pratica ? "Não possui data de prova" : item.avaliacaoSubstitutiva || "Não informado"}</strong>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join("");
+  estadoInicial.classList.add(
+    "escondido"
+  );
+
+  listaResultado.classList.remove(
+    "escondido"
+  );
+
+  listaResultado.innerHTML = html;
 }
 
 function limparConsulta() {
@@ -531,99 +1123,171 @@ function limparConsulta() {
   selects.disciplina.value = "";
   selects.unidade.value = "";
 
-  listaTurmas.classList.add("escondido");
+  listaTurmas.classList.add(
+    "escondido"
+  );
 
   atualizarFiltros();
   consultar();
 }
 
-selects.mes.addEventListener("change", () => {
-  atualizarFiltros();
-  consultar();
-});
-
-selects.turma.addEventListener("focus", () => {
-  renderizarListaTurmas();
-});
-
-selects.turma.addEventListener("click", () => {
-  renderizarListaTurmas();
-});
-
-selects.turma.addEventListener("input", () => {
-  renderizarListaTurmas();
-  atualizarFiltros();
-  consultar();
-});
-
-selects.turma.addEventListener("blur", () => {
-  setTimeout(() => {
-    listaTurmas.classList.add("escondido");
-  }, 150);
-});
-
-limparTurma.addEventListener("click", () => {
-  selects.turma.value = "";
-  selects.turma.focus();
-
-  atualizarFiltros();
-  consultar();
-  renderizarListaTurmas();
-});
-
-selects.disciplina.addEventListener("change", () => {
-  atualizarFiltros();
-  consultar();
-  destacarDisciplinaSelecionada();
-});
-
-selects.unidade.addEventListener("change", () => {
-  atualizarFiltros();
-  consultar();
-});
-
-document.getElementById("limpar").addEventListener("click", limparConsulta);
-
-document.addEventListener("click", event => {
-  const campoTurma = document.querySelector(".campo-turma");
-
-  if (campoTurma && !campoTurma.contains(event.target)) {
-    listaTurmas.classList.add("escondido");
+selects.mes.addEventListener(
+  "change",
+  () => {
+    atualizarFiltros();
+    consultar();
   }
-});
+);
+
+selects.turma.addEventListener(
+  "focus",
+  () => {
+    renderizarListaTurmas();
+  }
+);
+
+selects.turma.addEventListener(
+  "click",
+  () => {
+    renderizarListaTurmas();
+  }
+);
+
+selects.turma.addEventListener(
+  "input",
+  () => {
+    renderizarListaTurmas();
+    atualizarFiltros();
+    consultar();
+  }
+);
+
+selects.turma.addEventListener(
+  "blur",
+  () => {
+    setTimeout(() => {
+      listaTurmas.classList.add(
+        "escondido"
+      );
+    }, 150);
+  }
+);
+
+limparTurma.addEventListener(
+  "click",
+  () => {
+    selects.turma.value = "";
+    selects.turma.focus();
+
+    atualizarFiltros();
+    consultar();
+    renderizarListaTurmas();
+  }
+);
+
+selects.disciplina.addEventListener(
+  "change",
+  () => {
+    atualizarFiltros();
+    consultar();
+    destacarDisciplinaSelecionada();
+  }
+);
+
+selects.unidade.addEventListener(
+  "change",
+  () => {
+    atualizarFiltros();
+    consultar();
+  }
+);
+
+document
+  .getElementById("limpar")
+  .addEventListener(
+    "click",
+    limparConsulta
+  );
+
+document.addEventListener(
+  "click",
+  event => {
+    const campoTurma =
+      document.querySelector(
+        ".campo-turma"
+      );
+
+    if (
+      campoTurma &&
+      !campoTurma.contains(event.target)
+    ) {
+      listaTurmas.classList.add(
+        "escondido"
+      );
+    }
+  }
+);
+
+function destacarDisciplinaSelecionada() {
+  const opcaoSelecionada =
+    selects.disciplina.options[
+      selects.disciplina.selectedIndex
+    ];
+
+  const textoSelecionado =
+    opcaoSelecionada?.textContent || "";
+
+  if (
+    textoSelecionado.startsWith(
+      "Prática Clínica:"
+    )
+  ) {
+    selects.disciplina.classList.add(
+      "pratica-clinica-selecionada"
+    );
+  } else {
+    selects.disciplina.classList.remove(
+      "pratica-clinica-selecionada"
+    );
+  }
+}
 
 async function iniciar() {
   try {
-    estadoInicial.textContent = "Carregando planilha...";
+    estadoInicial.textContent =
+      "Carregando planilha...";
 
-    const resposta = await fetch("./cronograma.xlsx?v=" + Date.now());
+    const resposta = await fetch(
+      "./cronograma.xlsx?v=" +
+      Date.now()
+    );
 
     if (!resposta.ok) {
-      throw new Error("Planilha não encontrada.");
+      throw new Error(
+        "Planilha não encontrada."
+      );
     }
 
-    const arrayBuffer = await resposta.arrayBuffer();
-    const workbook = XLSX.read(arrayBuffer, { type: "array" });
+    const arrayBuffer =
+      await resposta.arrayBuffer();
+
+    const workbook = XLSX.read(
+      arrayBuffer,
+      {
+        type: "array"
+      }
+    );
 
     dados = lerPlanilha(workbook);
 
     atualizarFiltros();
     consultar();
-
   } catch (erro) {
     console.error(erro);
+
     estadoInicial.textContent =
       "Não foi possível carregar a planilha cronograma.xlsx.";
   }
 }
-function destacarDisciplinaSelecionada() {
-  const textoSelecionado =
-    selects.disciplina.options[selects.disciplina.selectedIndex]?.textContent || "";
 
-  if (textoSelecionado.startsWith("Prática Clínica:")) {
-    selects.disciplina.classList.add("pratica-clinica-selecionada");
-  } else {
-    selects.disciplina.classList.remove("pratica-clinica-selecionada");
-  }
-}
 iniciar();
