@@ -100,6 +100,11 @@ const MATRIZ_CURRICULAR = [
     titulo: "Procedimentos Intradérmicos e Intramusculares - Prática II",
     chave: "intradermicos-intramusculares-pratica-2"
   },
+  {
+    grupo: "Práticas Clinicas / Básicas",
+    titulo: "Procedimentos Intradérmicos e Intramusculares - Prática III",
+    chave: "intradermicos-intramusculares-pratica-3"
+  },
 
   {
     grupo: "Práticas Clinicas / Básicas",
@@ -223,6 +228,9 @@ function chavesCurricularesDaDisciplina(disciplina) {
   const ehPratica2 =
     n.includes("pratica ii");
 
+  const ehPratica3 =
+    n.includes("pratica iii")
+
   const ehPraticaComum =
     n.includes("pratica") &&
     !ehPraticaClinica &&
@@ -311,20 +319,22 @@ function chavesCurricularesDaDisciplina(disciplina) {
     }
   }
 
-  if (
-    n.includes("intradermicos") ||
-    n.includes("intramusculares")
-  ) {
-    if (ehPratica2) {
-      chaves.push("intradermicos-intramusculares-pratica-2");
-    } else if (ehPratica1) {
-      chaves.push("intradermicos-intramusculares-pratica-1");
-    } else if (ehTeorica) {
-      chaves.push("intradermicos-intramusculares-teorica");
-    } else if (ehPraticaComum) {
-      chaves.push("intradermicos-intramusculares-pratica-1");
-    }
+if (
+  n.includes("intradermicos") ||
+  n.includes("intramusculares")
+) {
+  if (ehPratica3) {
+    chaves.push("intradermicos-intramusculares-pratica-3");
+  } else if (ehPratica2) {
+    chaves.push("intradermicos-intramusculares-pratica-2");
+  } else if (ehPratica1) {
+    chaves.push("intradermicos-intramusculares-pratica-1");
+  } else if (ehTeorica) {
+    chaves.push("intradermicos-intramusculares-teorica");
+  } else if (ehPraticaComum) {
+    chaves.push("intradermicos-intramusculares-pratica-1");
   }
+}
 
   if (n.includes("toxina botulinica")) {
     if (ehPraticaClinica) {
