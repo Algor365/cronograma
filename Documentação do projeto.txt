@@ -1,0 +1,15 @@
+Documentação do projeto de calendario do IEWW
+
+
+Foram utilizadas as seguintes tecnologias:
+
+JS
+Html
+Arquivos xlsx como banco de dados
+
+
+Site hospedado inicialmente no git pages
+
+
+Primeiro erro:
+se caso após o uploud não mostrar os meses mas mostrar aulas e no dia aparecer numeros de sequencia como 1.2.3.4 a coluna de mês está errada precisando ser corrida colocando o nome da coluna corretamente sendo : MÊS
