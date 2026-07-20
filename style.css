@@ -369,3 +369,15 @@ select.pratica-clinica-selecionada {
     margin-bottom: 0;
     border: 0;
 }
+.verificando-notificacao {
+  visibility: hidden;
+}
+
+.painel-notificacao.oculto {
+  opacity: 0;
+  transform: translateY(-8px);
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
