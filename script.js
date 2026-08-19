@@ -3,52 +3,52 @@ let dados = [];
 const MATRIZ_CURRICULAR = [
 
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Legislação Estética",
     chave: "legislacao-estetica"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Prescrição Aplicada à Estética",
     chave: "prescricao-aplicada-estetica"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Biossegurança e Primeiros Socorros Aplicados à Saúde Estética",
     chave: "biosseguranca-primeiros-socorros"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Patologia e Imunologia Aplicada à Estética",
     chave: "patologia-imunologia"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Cosmetologia Avançada",
     chave: "cosmetologia-avancada"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Farmacologia dos Injetáveis Corporais e Faciais",
     chave: "farmacologia-injetaveis"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Multidisciplinaridade na Estética e Saúde",
     chave: "multidisciplinaridade"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Anatomofisiologia da Cabeça e Pescoço",
     chave: "anatomofisiologia-cabeca-pescoco"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Anatomofisiologia do Sistema Tegumentar e Endócrino",
     chave: "anatomofisiologia-tegumentar-endocrino"
   },
   {
-    grupo: "Aulas síncronas",
+    grupo: "Aulas Síncronas",
     titulo: "Ciência Estética",
     chave: "ciencia-estetica"
   },
@@ -181,6 +181,7 @@ const selects = {
 
 const listaTurmas = document.getElementById("listaTurmas");
 const limparTurma = document.getElementById("limparTurma");
+const aulasRealizadas = document.getElementById("aulasRealizadas");
 const estadoInicial = document.getElementById("estadoInicial");
 const listaResultado = document.getElementById("listaResultado");
 
@@ -640,10 +641,70 @@ function dataDaAulaValida(item) {
   return dataAula >= hoje;
 }
 
-function dadosAtivos() {
-  return dados.filter(item =>
-    dataDaAulaValida(item)
+function dataDaAvaliacao(valor) {
+  const datasEncontradas = [...String(valor || "").matchAll(
+    /\b(\d{1,2})[\/-](\d{1,2})[\/-](\d{2}|\d{4})\b/g
+  )];
+
+  const partes = datasEncontradas.at(-1);
+
+  if (!partes) {
+    return null;
+  }
+
+  const dia = Number(partes[1]);
+  const mes = Number(partes[2]);
+  let ano = Number(partes[3]);
+
+  if (ano < 100) {
+    ano += 2000;
+  }
+
+  const data = new Date(ano, mes - 1, dia);
+  data.setHours(0, 0, 0, 0);
+
+  if (
+    data.getFullYear() !== ano ||
+    data.getMonth() !== mes - 1 ||
+    data.getDate() !== dia
+  ) {
+    return null;
+  }
+
+  return data;
+}
+
+function dataJaPassou(data) {
+  if (!data) {
+    return false;
+  }
+
+  const hoje = new Date();
+  hoje.setHours(0, 0, 0, 0);
+
+  return data < hoje;
+}
+
+function cicloDaAulaEncerrado(item) {
+  const dataSubstitutiva = dataDaAvaliacao(
+    item.avaliacaoSubstitutiva
   );
+
+  if (dataSubstitutiva) {
+    return dataJaPassou(dataSubstitutiva);
+  }
+
+  return !dataDaAulaValida(item);
+}
+
+function dadosAtivos() {
+  return dados.filter(item => {
+    const cicloEncerrado = cicloDaAulaEncerrado(item);
+
+    return aulasRealizadas.checked
+      ? !dataDaAulaValida(item)
+      : !cicloEncerrado;
+  });
 }
 
 function dataFormatada(item) {
@@ -931,8 +992,19 @@ function cardComData(
     : item.avaliacaoSubstitutiva ||
       "-";
 
+  const cardRealizada = aulasRealizadas.checked;
+  const cardCinza =
+    cardRealizada ||
+    !dataDaAulaValida(item);
+
+  const classesCard = [
+    "card",
+    cardCinza ? "card-cinza" : "",
+    cardRealizada ? "card-realizada" : ""
+  ].filter(Boolean).join(" ");
+
   return `
-    <article class="card">
+    <article class="${classesCard}">
       <h2>
         ${escaparHtml(tituloMatriz)}
       </h2>
@@ -1006,6 +1078,37 @@ function cardComData(
   `;
 }
 
+function rolarParaPrimeiroCardRosa() {
+  if (aulasRealizadas.checked) {
+    return;
+  }
+
+  requestAnimationFrame(() => {
+    const primeiroCardRosa =
+      listaResultado.querySelector(
+        ".card:not(.card-cinza)"
+      );
+
+    if (!primeiroCardRosa) {
+      return;
+    }
+
+    const topoCard =
+      primeiroCardRosa.getBoundingClientRect().top;
+
+    const topoLista =
+      listaResultado.getBoundingClientRect().top;
+
+    listaResultado.scrollTo({
+      top:
+        listaResultado.scrollTop +
+        topoCard -
+        topoLista,
+      behavior: "smooth"
+    });
+  });
+}
+
 function consultar() {
   const listaFiltrada = ordenarAulas(
     filtrarDados()
@@ -1065,6 +1168,7 @@ function consultar() {
     );
 
     listaResultado.innerHTML = html;
+    rolarParaPrimeiroCardRosa();
 
     return;
   }
@@ -1104,9 +1208,23 @@ function consultar() {
   let html = "";
 
   if (!aulasDaDisciplina.length) {
-    html = cardSemData(
-      disciplinaMatriz
-    );
+    if (aulasRealizadas.checked) {
+      listaResultado.innerHTML = "";
+      listaResultado.classList.add(
+        "escondido"
+      );
+
+      estadoInicial.textContent =
+        "Nenhuma aula realizada encontrada para os filtros selecionados.";
+
+      estadoInicial.classList.remove(
+        "escondido"
+      );
+
+      return;
+    }
+
+    html = cardSemData(disciplinaMatriz);
   } else {
     html = aulasDaDisciplina.map(item =>
       cardComData(
@@ -1125,6 +1243,7 @@ function consultar() {
   );
 
   listaResultado.innerHTML = html;
+  rolarParaPrimeiroCardRosa();
 }
 
 function limparConsulta() {
@@ -1132,6 +1251,7 @@ function limparConsulta() {
   selects.turma.value = "";
   selects.disciplina.value = "";
   selects.unidade.value = "";
+  aulasRealizadas.checked = false;
 
   listaTurmas.classList.add(
     "escondido"
@@ -1207,6 +1327,23 @@ selects.disciplina.addEventListener(
 selects.unidade.addEventListener(
   "change",
   () => {
+    atualizarFiltros();
+    consultar();
+  }
+);
+
+aulasRealizadas.addEventListener(
+  "change",
+  () => {
+    selects.mes.value = "";
+    selects.turma.value = "";
+    selects.disciplina.value = "";
+    selects.unidade.value = "";
+
+    listaTurmas.classList.add(
+      "escondido"
+    );
+
     atualizarFiltros();
     consultar();
   }

@@ -1,0 +1,87 @@
+ATUALIZAÇÕES REALIZADAS NO SISTEMA
+
+1. Nova chave "Aulas realizadas"
+
+Foi adicionada uma chave chamada "Aulas realizadas" logo abaixo do filtro de Unidade.
+
+Ao abrir o sistema, essa chave vem desligada (OFF). Isso significa que o sistema apresenta primeiro as aulas atuais, as aulas futuras e também as aulas passadas que ainda estão dentro do período de avaliação.
+
+Quando a chave é ligada (ON), o sistema mostra somente as aulas cuja data da aula já passou.
+
+Ao clicar no botão "Limpar Filtros", todos os filtros são apagados e a chave "Aulas realizadas" volta automaticamente para a posição desligada.
+
+
+2. Nova regra para aulas que já aconteceram
+
+Antes desta atualização, uma aula desaparecia da consulta assim que a sua data passava.
+
+Agora o sistema também verifica a data da avaliação substitutiva.
+
+A regra funciona assim:
+
+- Antes da data da aula, o card aparece normalmente na cor rosa.
+- Depois que a data da aula passa, o card continua aparecendo com a chave desligada, mas muda para cinza-claro.
+- O card cinza permanece visível enquanto a data final da avaliação substitutiva ainda não passou.
+- Depois que a data final da avaliação substitutiva passa, o card deixa de aparecer na consulta normal.
+- Depois disso, o card pode ser encontrado ligando a chave "Aulas realizadas".
+
+Se uma aula não tiver uma data substitutiva válida, o sistema usa a própria data da aula para decidir quando ela deve sair da consulta normal.
+
+
+3. Períodos de avaliação
+
+Algumas datas da planilha são apresentadas como um período. Por exemplo:
+
+18/09/2026 a 22/09/2026
+
+O sistema agora entende que esse período termina em 22/09/2026. Portanto, ele sempre considera a última data escrita no campo como a data final da avaliação substitutiva.
+
+São aceitas datas com barras ou hífens e com o ano completo ou abreviado, como:
+
+- 22/09/2026
+- 22/09/26
+- 22-09-2026
+
+
+4. Cores dos cards
+
+Os cards das aulas futuras continuam com o fundo rosa.
+
+Assim que a data da aula passa, o fundo do card muda para cinza-claro. Essa cor ajuda o usuário a perceber que a aula já aconteceu, mas que o seu período de avaliação ainda pode estar aberto.
+
+Ao ligar a chave "Aulas realizadas", todos os cards apresentados ficam em cinza-claro.
+
+Com a chave ligada, o nome do mês dentro do card aparece em vermelho para facilitar a identificação visual.
+
+
+5. Rolagem automática dos resultados
+
+Quando a chave "Aulas realizadas" está desligada e o usuário aplica um filtro, a lista rola automaticamente até o primeiro card rosa.
+
+Isso facilita a localização da próxima aula que ainda não aconteceu.
+
+Os cards cinza não são apagados. Eles continuam acima na mesma lista, e o usuário pode rolar para cima manualmente para consultá-los.
+
+Quando a chave "Aulas realizadas" está ligada, essa rolagem automática não acontece.
+
+
+6. Atualização dos filtros
+
+Os filtros de mês, turma, disciplina e unidade acompanham a posição da chave.
+
+Com a chave desligada, eles apresentam opções relacionadas às aulas disponíveis na consulta normal.
+
+Com a chave ligada, eles passam a apresentar opções relacionadas somente às aulas que já aconteceram.
+
+Ao ligar ou desligar a chave, os filtros escolhidos anteriormente são limpos. Isso evita que um filtro antigo esconda resultados e faça parecer que não existem aulas.
+
+
+RESUMO DO FUNCIONAMENTO
+
+Card rosa: a data da aula ainda não passou.
+
+Card cinza com a chave desligada: a aula já aconteceu, mas a data final da substitutiva ainda não passou.
+
+Chave "Aulas realizadas" ligada: mostra todas as aulas cuja data da aula já passou.
+
+Depois da data final da substitutiva: o card aparece somente quando a chave "Aulas realizadas" estiver ligada.

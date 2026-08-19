@@ -75,6 +75,61 @@ label {
   font-size: 14px;
 }
 
+.filtro-chave {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.chave {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.chave input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+.chave-trilho {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  border-radius: 999px;
+  background: #c9c1ce;
+  transition: 0.2s;
+}
+
+.chave-trilho::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: 0.2s;
+}
+
+.chave input:checked + .chave-trilho {
+  background: #80008c;
+}
+
+.chave input:checked + .chave-trilho::after {
+  transform: translateX(22px);
+}
+
+.chave input:focus-visible + .chave-trilho {
+  outline: 3px solid rgba(128, 0, 140, 0.22);
+  outline-offset: 2px;
+}
+
 select,
 input,
 button {
@@ -242,8 +297,17 @@ button:hover {
 .card {
   padding: 16px;
   border-radius: 18px;
-  background: #f6eaf7;
+  background: #E281FF;
   border: 1px solid #e7c8eb;
+}
+
+.card-cinza {
+  background: #a7a5a5;
+  border-color: #dedede;
+}
+
+.card-realizada .grid > div:first-child strong {
+  color: #c62828;
 }
 
 .card h2 {
@@ -259,7 +323,7 @@ button:hover {
 }
 
 .grid div {
-  background: #fff;
+  background: #ffffff;
   padding: 12px;
   border-radius: 14px;
 }

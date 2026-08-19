@@ -8,7 +8,7 @@
   <title>Consulta de Turmas e Avaliações</title>
 
   <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-  <link rel="stylesheet" href="./style.css?v=20260707">
+  <link rel="stylesheet" href="./style.css?v=20260819-2">
 </head>
 <body>
   <main class="app">
@@ -60,6 +60,14 @@
           </select>
         </label>
 
+        <label class="filtro-chave" for="aulasRealizadas">
+          <span>Mostrar aulas realizadas (anteriores)</span>
+          <span class="chave">
+            <input id="aulasRealizadas" type="checkbox">
+            <span class="chave-trilho" aria-hidden="true"></span>
+          </span>
+        </label>
+
         <button id="limpar" type="button">Limpar Filtros</button>
       </div>
 
@@ -72,6 +80,6 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-  <script src="./script.js?v=20260707-2"></script>
+  <script src="./script.js?v=20260819-6"></script>
 </body>
 </html>
