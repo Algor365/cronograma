@@ -222,21 +222,23 @@ function chavesCurricularesDaDisciplina(disciplina) {
   const ehPraticaClinica =
     n.includes("pratica clinica");
 
+  // A planilha possui algarismos romanos digitados tanto com "i"
+  // quanto com "l" minúsculo (por exemplo, "Prática ll").
   const ehPratica1 =
-    n.includes("pratica i") &&
-    !n.includes("pratica ii");
+    /\bpratica\s+(?:i|l|1)\b/.test(n);
 
   const ehPratica2 =
-    n.includes("pratica ii");
+    /\bpratica\s+(?:ii|ll|2)\b/.test(n);
 
   const ehPratica3 =
-    n.includes("pratica iii")
+    /\bpratica\s+(?:iii|lll|3)\b/.test(n);
 
   const ehPraticaComum =
     n.includes("pratica") &&
     !ehPraticaClinica &&
     !ehPratica1 &&
-    !ehPratica2;
+    !ehPratica2 &&
+    !ehPratica3;
 
   if (n.includes("legislacao estetica")) {
     chaves.push("legislacao-estetica");
