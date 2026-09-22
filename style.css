@@ -39,9 +39,21 @@ h1 {
   margin-bottom: 10px;
 }
 
-.hero p:last-child {
+.hero .subtitulo {
   color: #e5dced;
   font-size: 17px;
+}
+
+.aviso-calendario {
+  margin-top: 20px;
+  padding: 14px 18px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  border-left: 4px solid #d4af37;
+  border-radius: 10px;
+  background: rgba(212, 175, 55, 0.12);
+  color: #ffe8a3;
+  font-size: 17px;
+  line-height: 1.5;
 }
 
 .painel {
