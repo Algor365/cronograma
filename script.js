@@ -14,7 +14,7 @@ const MATRIZ_CURRICULAR = [
   },
   {
     grupo: "Aulas Síncronas",
-    titulo: "Biossegurança e Primeiros Socorros Aplicados à Saúde Estética",
+    titulo: "Biossegurança e Primeiros Socorros",
     chave: "biosseguranca-primeiros-socorros"
   },
   {
@@ -981,6 +981,13 @@ function cardComData(
   item,
   tituloMatriz
 ) {
+  const disciplinasDaAula = MATRIZ_CURRICULAR.filter(disciplina =>
+    disciplinaPertenceAMatriz(item.disciplina, disciplina.chave)
+  );
+
+  const titulo = disciplinasDaAula.map(disciplina => disciplina.titulo)
+    .join(" / ") || tituloMatriz;
+
   const pratica =
     ehPraticaClinica(item);
 
@@ -1008,7 +1015,7 @@ function cardComData(
   return `
     <article class="${classesCard}">
       <h2>
-        ${escaparHtml(tituloMatriz)}
+        ${escaparHtml(titulo)}
       </h2>
 
       <div class="grid">
@@ -1142,22 +1149,9 @@ function consultar() {
     }
 
     const html = listaFiltrada.map(item => {
-      const disciplinaMatriz =
-        MATRIZ_CURRICULAR.find(disciplina =>
-          disciplinaPertenceAMatriz(
-            item.disciplina,
-            disciplina.chave
-          )
-        );
-
-      const titulo =
-        disciplinaMatriz?.titulo ||
-        item.disciplina ||
-        "Disciplina";
-
       return cardComData(
         item,
-        titulo
+        item.disciplina || "Disciplina"
       );
     }).join("");
 
