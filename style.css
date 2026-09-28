@@ -352,6 +352,10 @@ button:hover {
   color: #1d1028;
 }
 
+.card .grid > div:first-child strong.mes-referencia-outubro {
+  color: #e90000;
+}
+
 .sem-prova {
   background: #fff7dc !important;
   border: 1px solid #e4c96c;

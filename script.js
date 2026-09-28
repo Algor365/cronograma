@@ -1002,6 +1002,13 @@ function cardComData(
       "-";
 
   const cardRealizada = aulasRealizadas.checked;
+  const referenteAOutubro =
+    normalizar(item.mes) === "novembro" &&
+    Number(item.dia) === 1 &&
+    /\bbios?seguranca\b/.test(normalizar(item.disciplina));
+  const textoMes = referenteAOutubro
+    ? "Novembro (aula referente ao mês de outubro)"
+    : item.mes || "-";
   const cardCinza =
     cardRealizada ||
     !dataDaAulaValida(item);
@@ -1022,8 +1029,8 @@ function cardComData(
         <div>
           <span>Mês</span>
 
-          <strong>
-            ${escaparHtml(item.mes || "-")}
+          <strong class="${referenteAOutubro ? "mes-referencia-outubro" : ""}">
+            ${escaparHtml(textoMes)}
           </strong>
         </div>
 
