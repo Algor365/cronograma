@@ -1,4 +1,5 @@
 ATUALIZAÇÕES REALIZADAS NO SISTEMA
+Última atualização: 06/10/2026
 
 1. Nova chave "Aulas realizadas"
 
@@ -19,8 +20,8 @@ Agora o sistema também verifica a data da avaliação substitutiva.
 
 A regra funciona assim:
 
-- Antes da data da aula, o card aparece normalmente na cor rosa.
-- Depois que a data da aula passa, o card continua aparecendo com a chave desligada, mas muda para cinza-claro.
+- Antes da data da aula, o card aparece com fundo branco e borda lilás.
+- Depois que a data da aula passa, o card continua aparecendo com a chave desligada, mas recebe borda cinza quando todas as aulas agrupadas já aconteceram.
 - O card cinza permanece visível enquanto a data final da avaliação substitutiva ainda não passou.
 - Depois que a data final da avaliação substitutiva passa, o card deixa de aparecer na consulta normal.
 - Depois disso, o card pode ser encontrado ligando a chave "Aulas realizadas".
@@ -45,22 +46,20 @@ São aceitas datas com barras ou hífens e com o ano completo ou abreviado, como
 
 4. Cores dos cards
 
-Os cards das aulas futuras continuam com o fundo rosa.
+Os cards possuem fundo branco e borda lilás.
 
-Assim que a data da aula passa, o fundo do card muda para cinza-claro. Essa cor ajuda o usuário a perceber que a aula já aconteceu, mas que o seu período de avaliação ainda pode estar aberto.
+Quando todas as aulas agrupadas no card já aconteceram, a borda muda para cinza e os detalhes internos usam um lilás mais neutro.
 
-Ao ligar a chave "Aulas realizadas", todos os cards apresentados ficam em cinza-claro.
+Com a chave "Aulas realizadas" ligada, as datas das aulas aparecem em vermelho.
 
-Com a chave ligada, o nome do mês dentro do card aparece em vermelho para facilitar a identificação visual.
+As práticas clínicas continuam com destaque claro nos blocos de avaliação, indicando "Prática Clínica" no lugar das datas de prova.
 
 
 5. Rolagem automática dos resultados
 
-Quando a chave "Aulas realizadas" está desligada e o usuário aplica um filtro, a lista rola automaticamente até o primeiro card rosa.
+Quando a chave "Aulas realizadas" está desligada e o usuário aplica um filtro, a lista rola automaticamente até o primeiro card que ainda possui aula atual ou futura.
 
-Isso facilita a localização da próxima aula que ainda não aconteceu.
-
-Os cards cinza não são apagados. Eles continuam acima na mesma lista, e o usuário pode rolar para cima manualmente para consultá-los.
+Os cards de aulas anteriores continuam na mesma lista enquanto estiverem disponíveis pelas regras de avaliação.
 
 Quando a chave "Aulas realizadas" está ligada, essa rolagem automática não acontece.
 
@@ -76,12 +75,80 @@ Com a chave ligada, eles passam a apresentar opções relacionadas somente às a
 Ao ligar ou desligar a chave, os filtros escolhidos anteriormente são limpos. Isso evita que um filtro antigo esconda resultados e faça parecer que não existem aulas.
 
 
+7. Novo visual e organização dos cards
+
+O HTML dos cards, gerado pelo script.js, e o style.css foram atualizados seguindo o exemplo enviado.
+
+- Fundo branco, borda lilás e cantos arredondados.
+- Cabeçalho com mês e ano, unidade e código da turma.
+- Título da disciplina acima dos blocos de aulas.
+- Teoria e prática lado a lado, quando agrupadas no mesmo card.
+- Modalidade na parte de cima de cada bloco e data da aula embaixo.
+- Nome repetido da disciplina removido do interior dos blocos.
+- Seção "Data das avaliações" com avaliação regular e substitutiva.
+- Em telas pequenas, os blocos ficam empilhados.
+- Espaço abaixo do cabeçalho reduzido em 8 px para diminuir a altura do card.
+
+As aulas são agrupadas quando possuem o mesmo mês, turma, unidade, nome-base da disciplina e informações de avaliação.
+
+
+8. Consulta de teoria e prática
+
+Ao selecionar uma disciplina teórica ou prática no filtro, o sistema consulta as duas modalidades da mesma família curricular.
+
+Assim, pesquisar por teoria ou por prática permite mostrar as respectivas datas no mesmo card quando os registros atendem às condições de agrupamento.
+
+Os filtros de mês, turma e unidade e as regras da chave "Aulas realizadas" continuam sendo respeitados.
+
+Práticas clínicas e outras disciplinas continuam separadas. Nas disciplinas com práticas I, II e III, a consulta também considera as modalidades da mesma família.
+
+
+9. Fundo branco nos filtros
+
+Foi removido o destaque roxo aplicado ao selecionar "Prática Clínica".
+
+Os campos de filtro, as opções e os grupos de disciplinas agora usam fundo branco e texto escuro, inclusive em telas pequenas.
+
+
+10. Textos das modalidades e edição pelo CSS
+
+As aulas teóricas exibem "Teoria (presencial)".
+
+As aulas práticas exibem "Prática (presencial)", preservando complementos como I, II, III ou Clínica quando presentes na modalidade.
+
+As disciplinas identificadas na matriz curricular como aulas síncronas exibem "Aula síncrona (ao vivo)".
+
+Quando o texto da unidade abaixo do mês contém "síncrona", também recebe "(ao vivo)" ao lado.
+
+Cada texto possui uma classe no style.css com cor, família da fonte, peso e tamanho independentes:
+
+- .modalidade-teoria: texto "Teoria".
+- .modalidade-presencial: texto "(presencial)" da teoria.
+- .modalidade-pratica: texto da modalidade prática.
+- .modalidade-pratica-presencial: texto "(presencial)" da prática.
+- .modalidade-sincrona: texto "Aula síncrona" dentro do bloco de aula.
+- .modalidade-ao-vivo: texto "(ao vivo)" dentro do bloco de aula.
+- .cabecalho-sincrona: texto da unidade síncrona abaixo do mês.
+- .cabecalho-ao-vivo: texto "(ao vivo)" abaixo do mês.
+
+Para personalizar cada classe, altere:
+
+- color: cor do texto.
+- font-family: fonte utilizada.
+- font-weight: peso da fonte, como 400 para normal ou 700 para negrito.
+- font-size: tamanho da fonte.
+
+O index.html também recebeu novas versões nos links de CSS e JavaScript para atualizar os arquivos no navegador, além de aria-live na lista de resultados para anunciar mudanças da consulta.
+
+
 RESUMO DO FUNCIONAMENTO
 
-Card rosa: a data da aula ainda não passou.
+Card com borda lilás: possui ao menos uma aula cuja data ainda não passou.
 
-Card cinza com a chave desligada: a aula já aconteceu, mas a data final da substitutiva ainda não passou.
+Card com borda cinza e chave desligada: todas as aulas agrupadas já aconteceram, mas seus registros ainda estão disponíveis pelas regras de avaliação.
 
-Chave "Aulas realizadas" ligada: mostra todas as aulas cuja data da aula já passou.
+Chave "Aulas realizadas" ligada: mostra as aulas cuja data já passou, com as datas em vermelho.
 
-Depois da data final da substitutiva: o card aparece somente quando a chave "Aulas realizadas" estiver ligada.
+Depois da data final da substitutiva: o registro aparece somente quando a chave "Aulas realizadas" estiver ligada.
+
+Selecionar teoria ou prática: consulta as modalidades da mesma família curricular, respeitando os demais filtros.

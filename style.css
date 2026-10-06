@@ -129,15 +129,15 @@ label {
   transition: 0.2s;
 }
 
-.chave input:checked + .chave-trilho {
+.chave input:checked+.chave-trilho {
   background: #80008c;
 }
 
-.chave input:checked + .chave-trilho::after {
+.chave input:checked+.chave-trilho::after {
   transform: translateX(22px);
 }
 
-.chave input:focus-visible + .chave-trilho {
+.chave input:focus-visible+.chave-trilho {
   outline: 3px solid rgba(128, 0, 140, 0.22);
   outline-offset: 2px;
 }
@@ -157,6 +157,7 @@ button {
 
 select,
 input {
+  color: #1d1028;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -307,58 +308,239 @@ button:hover {
 }
 
 .card {
-  padding: 16px;
-  border-radius: 18px;
-  background: #E281FF;
-  border: 1px solid #e7c8eb;
+  --card-lilas: #eee4ff;
+  --card-roxo: #510bc4;
+  padding: clamp(2px, 0.5vw, 10px);
+  border: 10px solid #b99aef;
+  border-radius: 30px;
+  background: #fff;
+  color: #111;
+  box-shadow: 0 4px 18px rgba(91, 45, 150, 0.1);
+  min-width: 0;
 }
 
-.card-cinza {
-  background: #a7a5a5;
-  border-color: #dedede;
-}
-
-.card-realizada .grid > div:first-child strong {
-  color: #c62828;
+.card-cabecalho {
+  text-align: center;
+  padding: 15px 0 16px;
+  border-bottom: 2px solid #e6d8fc;
 }
 
 .card h2 {
-  font-size: 17px;
-  color: #1d1028;
-  margin-bottom: 12px;
+  font-size: clamp(5px, 3.7vw, 54px);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.1;
+  overflow-wrap: anywhere;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+.card-unidade {
+  margin-top: 5px;
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
-.grid div {
-  background: #ffffff;
-  padding: 12px;
-  border-radius: 14px;
-}
 
-.grid span {
-  display: block;
-  font-size: 12px;
-  color: #6d5a79;
-  margin-bottom: 4px;
-}
 
-.grid strong {
+.cabecalho-ao-vivo {
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
   font-size: 14px;
-  color: #1d1028;
+  text-transform: none;
 }
 
-.card .grid > div:first-child strong.mes-referencia-outubro {
-  color: #e90000;
+.card-turma {
+  margin-top: 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.card-turma strong {
+  margin-left: 6px;
+  font-size: 18px;
+}
+
+.card-secao {
+  padding-top: 22px;
+}
+
+.card-secao h3 {
+  padding: 10px 12px;
+  border-radius: 16px;
+  background: var(--card-lilas);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: clamp(15px, 2.3vw, 28px);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.card-aulas,
+.card-provas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.card-aula,
+.card-prova {
+  min-width: 0;
+  border: 1px solid #f1eaff;
+  border-radius: 16px;
+  padding: 5px 12px;
+  background: linear-gradient(135deg, #faf7ff, #fff 55%, #faf7ff);
+  text-align: center;
+}
+
+.card-aula {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-aula:only-child {
+  grid-column: 1 / -1;
+}
+
+.card-data,
+.card-modalidade,
+.card-prova h4 {
+  display: block;
+  padding: 10px 8px;
+  border-radius: 999px;
+  background: var(--card-lilas);
+}
+
+.card-data {
+  margin-top: 14px;
+  font-size: clamp(18px, 2vw, 24px);
+}
+
+.card-modalidade {
+  margin-top: 0;
+  color: var(--card-roxo);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Cor, fonte, peso e tamanho independentes dos textos da aula teórica. */
+.modalidade-teoria {
+  color: #510bc4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.modalidade-presencial {
+  color: #510bc4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Cor, fonte, peso e tamanho independentes dos textos da aula prática. */
+.modalidade-pratica {
+  color: #510bc4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+.modalidade-pratica-presencial {
+  color: #510bc4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+/* Edite cada texto das aulas síncronas separadamente. */
+.modalidade-sincrona {
+  color: #510bc4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+}
+
+/* Aula síncrona abaixo do mês: estilos independentes. */
+.cabecalho-sincrona {
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 800;
+  font-size: clamp(22px, 2.4vw, 32px);
+}
+
+.modalidade-ao-vivo {
+  color: #510bc4;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.card-avaliacoes {
+  margin-top: 22px;
+  border-top: 2px solid #e6d8fc;
+}
+
+.card-prova h4 {
+  color: var(--card-roxo);
+  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.card-prova p {
+  margin-top: 16px;
+  font-size: 18px;
+  line-height: 1.4;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.card-cinza {
+  border-color: #c6c0cf;
+  --card-lilas: #eeeaf3;
+}
+
+.card-realizada .card-data {
+  color: #c62828;
+}
+
+.mes-referencia-outubro {
+  color: #c62828;
+  font-size: 14px;
+  margin-top: 12px;
 }
 
 .sem-prova {
-  background: #fff7dc !important;
-  border: 1px solid #e4c96c;
+  background: #fff7dc;
+  border-color: #e4c96c;
+}
+
+.card-sem-data h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 480px) {
+  .resultado {
+    padding: 12px;
+  }
+
+  .card {
+    padding: 14px;
+    border-width: 7px;
+    border-radius: 24px;
+  }
+
+  .card-aulas,
+  .card-provas {
+    grid-template-columns: 1fr;
+  }
+
+  .card-cabecalho {
+    padding-top: 12px;
+  }
 }
 
 .escondido {
@@ -377,18 +559,14 @@ button:hover {
   .grid {
     grid-template-columns: 1fr;
   }
-  option.pratica-clinica {
-    background: #80008c;
-    color: #fff;
-    font-weight: bold;
 }
-select.pratica-clinica-selecionada {
-  background: #80008c;
-  color: #fff;
-  font-weight: 700;
-}
-}
+
 .subtitulo {
   color: #e5dced;
   font-size: 17px;
+}
+.formulario select option,
+.formulario select optgroup {
+  background: #fff;
+  color: #1d1028;
 }

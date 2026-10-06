@@ -580,14 +580,6 @@ function preencherSelectDisciplina(valores) {
     option.value = item.value;
     option.textContent = item.text;
 
-    if (
-      item.text.startsWith("Prática Clínica:")
-    ) {
-      option.classList.add(
-        "pratica-clinica"
-      );
-    }
-
     grupos.get(nomeGrupo)
       .appendChild(option);
   });
@@ -741,7 +733,7 @@ function turmasDisponiveis() {
 
   if (disciplina) {
     lista = lista.filter(item =>
-      disciplinaPertenceAMatriz(
+      disciplinaCorrespondeAoFiltro(
         item.disciplina,
         disciplina
       )
@@ -853,7 +845,7 @@ function atualizarFiltros() {
   if (disciplinaAtual) {
     listaSemUnidade =
       listaSemUnidade.filter(item =>
-        disciplinaPertenceAMatriz(
+        disciplinaCorrespondeAoFiltro(
           item.disciplina,
           disciplinaAtual
         )
@@ -887,7 +879,14 @@ function atualizarFiltros() {
   selects.unidade.value =
     unidadeAtual;
 
-  destacarDisciplinaSelecionada();
+}
+
+function disciplinaCorrespondeAoFiltro(disciplina, chaveSelecionada) {
+  const familia = chaveSelecionada.replace(/-(?:teorica|pratica(?:-[123])?)$/, "");
+  const chaves = MATRIZ_CURRICULAR
+    .filter(item => item.chave.replace(/-(?:teorica|pratica(?:-[123])?)$/, "") === familia)
+    .map(item => item.chave);
+  return chaves.some(chave => disciplinaPertenceAMatriz(disciplina, chave));
 }
 
 function filtrarDados() {
@@ -915,7 +914,7 @@ function filtrarDados() {
 
     const correspondeDisciplina =
       !disciplina ||
-      disciplinaPertenceAMatriz(
+      disciplinaCorrespondeAoFiltro(
         item.disciplina,
         disciplina
       );
@@ -977,119 +976,93 @@ function cardSemData(disciplina) {
   `;
 }
 
-function cardComData(
-  item,
-  tituloMatriz
-) {
-  const disciplinasDaAula = MATRIZ_CURRICULAR.filter(disciplina =>
-    disciplinaPertenceAMatriz(item.disciplina, disciplina.chave)
+function partesDaDisciplina(item) {
+  const titulo = nomeDisciplinaPadrao(item.disciplina || "Disciplina");
+  const partes = titulo.match(/^(.*?)\s*[-–]\s*(Teórica|Teoria|Prática(?:\s+(?:III|II|I|lll|ll|l|[123]))?)\s*$/i);
+  return {
+    nome: partes ? partes[1].trim() : titulo,
+    modalidade: partes ? partes[2] : (ehPraticaClinica(item) ? "Prática Clínica" : "Aula")
+  };
+}
+
+function textoUnidade(unidade) {
+  const texto = unidade || "Unidade não informada";
+  if (normalizar(texto).includes("sincrona")) {
+    return `<span class="cabecalho-sincrona">${escaparHtml(texto)}</span> <span class="cabecalho-ao-vivo">(ao vivo)</span>`;
+  }
+  return escaparHtml(texto);
+}
+
+function textoModalidade(modalidade, aula) {
+  const sincrona = aula && MATRIZ_CURRICULAR.some(disciplina =>
+    disciplina.grupo === "Aulas Síncronas" &&
+    disciplinaPertenceAMatriz(aula.disciplina, disciplina.chave)
   );
+  if (sincrona) {
+    return '<span class="modalidade-sincrona">Aula síncrona</span> <span class="modalidade-ao-vivo">(ao vivo)</span>';
+  }
+  if (["teoria", "teorica"].includes(normalizar(modalidade))) {
+    return '<span class="modalidade-teoria">Teoria</span> <span class="modalidade-presencial">(presencial)</span>';
+  }
+  if (/^pratica(?:\s|$)/.test(normalizar(modalidade))) {
+    return `<span class="modalidade-pratica">${escaparHtml(modalidade)}</span> <span class="modalidade-pratica-presencial">(presencial)</span>`;
+  }
+  return escaparHtml(modalidade);
+}
 
-  const titulo = disciplinasDaAula.map(disciplina => disciplina.titulo)
-    .join(" / ") || tituloMatriz;
+function renderizarCards(lista) {
+  const grupos = new Map();
+  lista.forEach(item => {
+    const { nome } = partesDaDisciplina(item);
+    const chave = JSON.stringify([item.mes, item.turma, item.unidade, normalizar(nome),
+      item.avaliacaoRegular, item.avaliacaoSubstitutiva]);
+    if (!grupos.has(chave)) grupos.set(chave, []);
+    grupos.get(chave).push(item);
+  });
+  return [...grupos.values()].map(itens => cardComData(itens)).join("");
+}
 
-  const pratica =
-    ehPraticaClinica(item);
-
-  const avaliacaoRegular = pratica
-    ? "Prática Clínica"
-    : item.avaliacaoRegular ||
-      "Não informado";
-
-  const avaliacaoSubstitutiva = pratica
-    ? "Prática Clínica"
-    : item.avaliacaoSubstitutiva ||
-      "-";
-
+function cardComData(itens) {
+  const item = itens[0];
+  const { nome } = partesDaDisciplina(item);
+  const pratica = ehPraticaClinica(item);
   const cardRealizada = aulasRealizadas.checked;
-  const referenteAOutubro =
-    normalizar(item.mes) === "novembro" &&
-    Number(item.dia) === 1 &&
+  const cardCinza = itens.every(aula => !dataDaAulaValida(aula));
+  const referenteAOutubro = normalizar(item.mes) === "novembro" &&
+    itens.some(aula => Number(aula.dia) === 1) &&
     /\bbios?seguranca\b/.test(normalizar(item.disciplina));
-  const textoMes = referenteAOutubro
-    ? "Novembro (aula referente ao mês de outubro)"
-    : item.mes || "-";
-  const cardCinza =
-    cardRealizada ||
-    !dataDaAulaValida(item);
-
-  const classesCard = [
-    "card",
-    cardCinza ? "card-cinza" : "",
-    cardRealizada ? "card-realizada" : ""
-  ].filter(Boolean).join(" ");
-
+  const tituloSecao = nome.replace(/^Procedimentos? Injetáveis? Estéticos?:\s*/i, "");
   return `
-    <article class="${classesCard}">
-      <h2>
-        ${escaparHtml(titulo)}
-      </h2>
-
-      <div class="grid">
-        <div>
-          <span>Mês</span>
-
-          <strong class="${referenteAOutubro ? "mes-referencia-outubro" : ""}">
-            ${escaparHtml(textoMes)}
-          </strong>
+    <article class="card ${cardCinza ? "card-cinza" : ""} ${cardRealizada ? "card-realizada" : ""}">
+      <header class="card-cabecalho">
+        <h2>${escaparHtml(item.mes || "Mês não informado")} 2026</h2>
+        <p class="card-unidade">${textoUnidade(item.unidade)}</p>
+        <p class="card-turma">Código da turma: <strong>${escaparHtml(item.turma || "-")}</strong></p>
+        ${referenteAOutubro ? '<p class="mes-referencia-outubro">Aula referente ao mês de outubro</p>' : ""}
+      </header>
+      <section class="card-secao" aria-label="Aulas">
+        <h3>${escaparHtml(tituloSecao)}</h3>
+        <div class="card-aulas">
+          ${itens.map(aula => `
+            <div class="card-aula ${!dataDaAulaValida(aula) ? "aula-realizada" : ""}">
+              <p class="card-modalidade">${textoModalidade(partesDaDisciplina(aula).modalidade, aula)}</p>
+              <strong class="card-data">${escaparHtml(dataFormatada(aula))}</strong>
+            </div>`).join("")}
         </div>
-
-        <div>
-          <span>Data da aula</span>
-
-          <strong>
-            ${escaparHtml(
-              dataFormatada(item)
-            )}
-          </strong>
+      </section>
+      <section class="card-secao card-avaliacoes" aria-label="Avaliações">
+        <h3>Data das avaliações</h3>
+        <div class="card-provas">
+          <div class="card-prova ${pratica ? "sem-prova" : ""}">
+            <h4>Regular</h4>
+            <p>${escaparHtml(pratica ? "Prática Clínica" : item.avaliacaoRegular || "Não informado")}</p>
+          </div>
+          <div class="card-prova ${pratica ? "sem-prova" : ""}">
+            <h4>Substitutiva</h4>
+            <p>${escaparHtml(pratica ? "Prática Clínica" : item.avaliacaoSubstitutiva || "Não informado")}</p>
+          </div>
         </div>
-
-        <div>
-          <span>Código da turma</span>
-
-          <strong>
-            ${escaparHtml(
-              item.turma || "-"
-            )}
-          </strong>
-        </div>
-
-        <div>
-          <span>Unidade</span>
-
-          <strong>
-            ${escaparHtml(
-              item.unidade || "-"
-            )}
-          </strong>
-        </div>
-
-        <div class="${
-          pratica ? "sem-prova" : ""
-        }">
-          <span>Avaliação regular</span>
-
-          <strong>
-            ${escaparHtml(
-              avaliacaoRegular
-            )}
-          </strong>
-        </div>
-
-        <div class="${
-          pratica ? "sem-prova" : ""
-        }">
-          <span>
-            Avaliação substitutiva
-          </span>
-
-          <strong>
-            ${escaparHtml(
-              avaliacaoSubstitutiva
-            )}
-          </strong>
-        </div>
-      </div>
+      </section>
     </article>
   `;
 }
@@ -1155,12 +1128,7 @@ function consultar() {
       return;
     }
 
-    const html = listaFiltrada.map(item => {
-      return cardComData(
-        item,
-        item.disciplina || "Disciplina"
-      );
-    }).join("");
+    const html = renderizarCards(listaFiltrada);
 
     estadoInicial.classList.add(
       "escondido"
@@ -1202,7 +1170,7 @@ function consultar() {
 
   const aulasDaDisciplina =
     listaFiltrada.filter(item =>
-      disciplinaPertenceAMatriz(
+      disciplinaCorrespondeAoFiltro(
         item.disciplina,
         disciplinaSelecionada
       )
@@ -1229,12 +1197,7 @@ function consultar() {
 
     html = cardSemData(disciplinaMatriz);
   } else {
-    html = aulasDaDisciplina.map(item =>
-      cardComData(
-        item,
-        disciplinaMatriz.titulo
-      )
-    ).join("");
+    html = renderizarCards(aulasDaDisciplina);
   }
 
   estadoInicial.classList.add(
@@ -1323,8 +1286,7 @@ selects.disciplina.addEventListener(
   () => {
     atualizarFiltros();
     consultar();
-    destacarDisciplinaSelecionada();
-  }
+    }
 );
 
 selects.unidade.addEventListener(
@@ -1377,30 +1339,6 @@ document.addEventListener(
     }
   }
 );
-
-function destacarDisciplinaSelecionada() {
-  const opcaoSelecionada =
-    selects.disciplina.options[
-      selects.disciplina.selectedIndex
-    ];
-
-  const textoSelecionado =
-    opcaoSelecionada?.textContent || "";
-
-  if (
-    textoSelecionado.startsWith(
-      "Prática Clínica:"
-    )
-  ) {
-    selects.disciplina.classList.add(
-      "pratica-clinica-selecionada"
-    );
-  } else {
-    selects.disciplina.classList.remove(
-      "pratica-clinica-selecionada"
-    );
-  }
-}
 
 async function iniciar() {
   try {
