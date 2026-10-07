@@ -167,6 +167,9 @@ O sistema lê a unidade da planilha principal para preencher os cards e os filtr
 Foi verificada a integridade dos quatro arquivos XLSX e a ausência do nome antigo no XML interno das planilhas. O script.js passou pela validação de sintaxe com node --check.
 
 
+Versão dos arquivos CSS e JavaScript atualizada no index.html para 20261007-01. Os novos endereços com ?v= fazem o navegador buscar os arquivos desta atualização. A planilha já usa Date.now() no endereço de carregamento, gerando uma URL nova a cada consulta inicial. Não é necessário apagar cookies.
+
+
 13. Guia de edição no style.css
 
 Elemento                                  Regra CSS
