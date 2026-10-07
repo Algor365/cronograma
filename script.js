@@ -1002,10 +1002,10 @@ function textoModalidade(modalidade, aula) {
     return '<span class="modalidade-sincrona">Aula síncrona</span> <span class="modalidade-ao-vivo">(ao vivo)</span>';
   }
   if (["teoria", "teorica"].includes(normalizar(modalidade))) {
-    return '<span class="modalidade-teoria">Teoria</span> <span class="modalidade-presencial">(presencial)</span>';
+    return '<span class="modalidade-teoria">Aula Teórica</span> <span class="modalidade-presencial">(Presencial)</span>';
   }
   if (/^pratica(?:\s|$)/.test(normalizar(modalidade))) {
-    return `<span class="modalidade-pratica">${escaparHtml(modalidade)}</span> <span class="modalidade-pratica-presencial">(presencial)</span>`;
+    return `<span class="modalidade-pratica">Aula ${escaparHtml(modalidade)}</span> <span class="modalidade-pratica-presencial">(Presencial)</span>`;
   }
   return escaparHtml(modalidade);
 }
@@ -1041,7 +1041,7 @@ function cardComData(itens) {
         ${referenteAOutubro ? '<p class="mes-referencia-outubro">Aula referente ao mês de outubro</p>' : ""}
       </header>
       <section class="card-secao" aria-label="Aulas">
-        <h3>${escaparHtml(tituloSecao)}</h3>
+        <h3 class="card-disciplina">${escaparHtml(tituloSecao)}</h3>
         <div class="card-aulas">
           ${itens.map(aula => `
             <div class="card-aula ${!dataDaAulaValida(aula) ? "aula-realizada" : ""}">
@@ -1051,14 +1051,13 @@ function cardComData(itens) {
         </div>
       </section>
       <section class="card-secao card-avaliacoes" aria-label="Avaliações">
-        <h3>Data das avaliações</h3>
         <div class="card-provas">
           <div class="card-prova ${pratica ? "sem-prova" : ""}">
-            <h4>Regular</h4>
+            <h4>Avaliação regular</h4>
             <p>${escaparHtml(pratica ? "Prática Clínica" : item.avaliacaoRegular || "Não informado")}</p>
           </div>
           <div class="card-prova ${pratica ? "sem-prova" : ""}">
-            <h4>Substitutiva</h4>
+            <h4>Avaliação substitutiva</h4>
             <p>${escaparHtml(pratica ? "Prática Clínica" : item.avaliacaoSubstitutiva || "Não informado")}</p>
           </div>
         </div>

@@ -321,16 +321,18 @@ button:hover {
 
 .card-cabecalho {
   text-align: center;
-  padding: 15px 0 16px;
-  border-bottom: 2px solid #e6d8fc;
+  padding: 0px 0 0px;
+  border-bottom: 2px solid #b99aef61;
+  margin-bottom: 0px;
 }
-
+/*ALtera o nome do mês*/
 .card h2 {
   font-size: clamp(5px, 3.7vw, 54px);
   font-weight: 800;
   text-transform: uppercase;
   line-height: 1.1;
   overflow-wrap: anywhere;
+  margin-top: 10px;
 }
 
 .card-unidade {
@@ -351,29 +353,35 @@ button:hover {
 }
 
 .card-turma {
+  padding-bottom: 10px;
   margin-top: 10px;
   font-size: 14px;
+  font-weight: 400;
   text-transform: uppercase;
 }
 
 .card-turma strong {
   margin-left: 6px;
   font-size: 18px;
+  font-weight: 700;
 }
 
 .card-secao {
-  padding-top: 22px;
+  padding-top: 10px;
+  font-size: 12px;
+ 
 }
 
-.card-secao h3 {
-  padding: 10px 12px;
+.card-disciplina {
   border-radius: 16px;
   background: var(--card-lilas);
   text-align: center;
-  text-transform: uppercase;
-  font-size: clamp(15px, 2.3vw, 28px);
+  text-transform: None;
+  font-size: 19px;
   line-height: 1.25;
   overflow-wrap: anywhere;
+  background-color: transparent;
+  margin-bottom: 10px;
 }
 
 .card-aulas,
@@ -381,7 +389,7 @@ button:hover {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
-  margin-top: 12px;
+  margin-top: 1px;
 }
 
 .card-aula,
@@ -392,6 +400,7 @@ button:hover {
   padding: 5px 12px;
   background: linear-gradient(135deg, #faf7ff, #fff 55%, #faf7ff);
   text-align: center;
+  
 }
 
 .card-aula {
@@ -413,8 +422,9 @@ button:hover {
 }
 
 .card-data {
-  margin-top: 14px;
+  margin-top: 0px;
   font-size: clamp(18px, 2vw, 24px);
+  background-color: transparent;
 }
 
 .card-modalidade {
@@ -426,40 +436,40 @@ button:hover {
 
 /* Cor, fonte, peso e tamanho independentes dos textos da aula teórica. */
 .modalidade-teoria {
-  color: #510bc4;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 22px;
+  color: var(--card-roxo);
+  text-transform: None;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .modalidade-presencial {
-  color: #510bc4;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
+ color: var(--card-roxo);
+  text-transform: None;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 /* Cor, fonte, peso e tamanho independentes dos textos da aula prática. */
 .modalidade-pratica {
-  color: #510bc4;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 22px;
+  color: var(--card-roxo);
+  text-transform: None;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 .modalidade-pratica-presencial {
-  color: #510bc4;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
+  color: var(--card-roxo);
+  text-transform: None;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 /* Edite cada texto das aulas síncronas separadamente. */
 .modalidade-sincrona {
-  color: #510bc4;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 22px;
+ color: var(--card-roxo);
+  text-transform: None;
+  font-size: 17px;
+  font-weight: 500;
 }
 
 /* Aula síncrona abaixo do mês: estilos independentes. */
@@ -471,26 +481,29 @@ button:hover {
 }
 
 .modalidade-ao-vivo {
-  color: #510bc4;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 700;
-  font-size: 14px;
-}
-
-.card-avaliacoes {
-  margin-top: 22px;
-  border-top: 2px solid #e6d8fc;
-}
-
-.card-prova h4 {
   color: var(--card-roxo);
-  text-transform: uppercase;
+  text-transform: None;
   font-size: 17px;
   font-weight: 500;
 }
 
+.card-avaliacoes {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid #b99aef61;
+}
+
+.card-prova h4 {
+  color: var(--card-roxo);
+  text-transform: None;
+  font-size: 17px;
+  font-weight: 500;
+
+  
+}
+/*alterar apenas a data(campo onde está os numeros)*/
 .card-prova p {
-  margin-top: 16px;
+  margin-top: 5px;
   font-size: 18px;
   line-height: 1.4;
   font-weight: 700;
@@ -499,6 +512,7 @@ button:hover {
 
 .card-cinza {
   border-color: #c6c0cf;
+  
   --card-lilas: #eeeaf3;
 }
 
@@ -531,6 +545,7 @@ button:hover {
     padding: 14px;
     border-width: 7px;
     border-radius: 24px;
+    
   }
 
   .card-aulas,
@@ -539,7 +554,7 @@ button:hover {
   }
 
   .card-cabecalho {
-    padding-top: 12px;
+    padding-top: 50px;
   }
 }
 

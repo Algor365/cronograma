@@ -1,5 +1,5 @@
 ATUALIZAÇÕES REALIZADAS NO SISTEMA
-Última atualização: 06/10/2026
+Última atualização: 07/10/2026
 
 1. Nova chave "Aulas realizadas"
 
@@ -85,7 +85,7 @@ O HTML dos cards, gerado pelo script.js, e o style.css foram atualizados seguind
 - Teoria e prática lado a lado, quando agrupadas no mesmo card.
 - Modalidade na parte de cima de cada bloco e data da aula embaixo.
 - Nome repetido da disciplina removido do interior dos blocos.
-- Seção "Data das avaliações" com avaliação regular e substitutiva.
+- Blocos de avaliação regular e substitutiva (o título "Data das avaliações" foi removido em 07/10/2026).
 - Em telas pequenas, os blocos ficam empilhados.
 - Espaço abaixo do cabeçalho reduzido em 8 px para diminuir a altura do card.
 
@@ -112,9 +112,9 @@ Os campos de filtro, as opções e os grupos de disciplinas agora usam fundo bra
 
 10. Textos das modalidades e edição pelo CSS
 
-As aulas teóricas exibem "Teoria (presencial)".
+As aulas teóricas exibem "Aula Teórica (Presencial)".
 
-As aulas práticas exibem "Prática (presencial)", preservando complementos como I, II, III ou Clínica quando presentes na modalidade.
+As aulas práticas exibem "Aula Prática (Presencial)", preservando complementos como I, II, III ou Clínica quando presentes na modalidade.
 
 As disciplinas identificadas na matriz curricular como aulas síncronas exibem "Aula síncrona (ao vivo)".
 
@@ -122,10 +122,10 @@ Quando o texto da unidade abaixo do mês contém "síncrona", também recebe "(a
 
 Cada texto possui uma classe no style.css com cor, família da fonte, peso e tamanho independentes:
 
-- .modalidade-teoria: texto "Teoria".
-- .modalidade-presencial: texto "(presencial)" da teoria.
+- .modalidade-teoria: texto "Aula Teórica".
+- .modalidade-presencial: texto "(Presencial)" da teoria.
 - .modalidade-pratica: texto da modalidade prática.
-- .modalidade-pratica-presencial: texto "(presencial)" da prática.
+- .modalidade-pratica-presencial: texto "(Presencial)" da prática.
 - .modalidade-sincrona: texto "Aula síncrona" dentro do bloco de aula.
 - .modalidade-ao-vivo: texto "(ao vivo)" dentro do bloco de aula.
 - .cabecalho-sincrona: texto da unidade síncrona abaixo do mês.
@@ -139,6 +139,80 @@ Para personalizar cada classe, altere:
 - font-size: tamanho da fonte.
 
 O index.html também recebeu novas versões nos links de CSS e JavaScript para atualizar os arquivos no navegador, além de aria-live na lista de resultados para anunciar mudanças da consulta.
+
+
+11. Atualização de 07/10/2026: personalização dos cards
+
+O título "Data das avaliações" foi removido. Os títulos Regular e Substitutiva e suas respectivas datas continuam visíveis.
+
+O nome da disciplina agora usa a classe exclusiva .card-disciplina, substituindo o seletor genérico .card-secao h3. Isso permite editar seu estilo sem vincular o título da disciplina a outros títulos de seção.
+
+O nome da disciplina mantém as maiúsculas e minúsculas dos dados, com text-transform: none, e tem fundo transparente.
+
+O texto "Código da turma:" e o número da turma possuem font-weight explícito e independente: .card-turma e .card-turma strong.
+
+As duas linhas divisórias usam a mesma cor, #b99aef61, e espessura de 2px. A linha acima da disciplina está em border-bottom de .card-cabecalho. A linha acima das provas está em border-top de .card-avaliacoes.
+
+Os espaços acima e abaixo da linha das provas podem ser ajustados separadamente em .card-avaliacoes: margin-top controla o espaço acima e padding-top controla o espaço abaixo. Ambos estão em 10px nesta atualização.
+
+As datas das aulas usam .card-data. As datas das provas usam .card-prova p. Os títulos Regular e Substitutiva compartilham .card-prova h4.
+
+
+12. Atualização da unidade para São Paulo
+
+O nome "Paulista" foi substituído por "São Paulo" em cronograma.xlsx e nas planilhas backup/10-09-26.xlsx, backup/16-07-26.xlsx e backup/17-07-26.xlsx.
+
+O sistema lê a unidade da planilha principal para preencher os cards e os filtros. Atualize a página para carregar os dados alterados.
+
+Foi verificada a integridade dos quatro arquivos XLSX e a ausência do nome antigo no XML interno das planilhas. O script.js passou pela validação de sintaxe com node --check.
+
+
+13. Guia de edição no style.css
+
+Elemento                                  Regra CSS
+Card completo                             .card
+Mês e ano                                 .card h2
+Unidade                                   .card-unidade
+Texto Código da turma                     .card-turma
+Número da turma                           .card-turma strong
+Nome da disciplina                        .card-disciplina
+Card completo da aula                     .card-aula
+Data da aula                              .card-data
+Faixa da modalidade                       .card-modalidade
+Aula Teórica                              .modalidade-teoria
+Presencial da teoria                      .modalidade-presencial
+Aula Prática e seus complementos          .modalidade-pratica
+Presencial da prática                     .modalidade-pratica-presencial
+Aula síncrona dentro do bloco             .modalidade-sincrona
+Ao vivo dentro do bloco                   .modalidade-ao-vivo
+Aula síncrona no cabeçalho                 .cabecalho-sincrona
+Ao vivo no cabeçalho                      .cabecalho-ao-vivo
+Card completo da prova                    .card-prova
+Regular e Substitutiva                    .card-prova h4
+Datas das provas                          .card-prova p
+Aviso de referência a outubro             .mes-referencia-outubro
+Linha acima da disciplina                 .card-cabecalho: border-bottom
+Linha acima das provas                    .card-avaliacoes: border-top
+Espaço acima da linha das provas           .card-avaliacoes: margin-top
+Espaço abaixo da linha das provas          .card-avaliacoes: padding-top
+Espaço abaixo do nome da disciplina        .card-disciplina: margin-bottom
+Espaço entre aulas                        .card-aulas: gap
+Espaço entre provas                       .card-provas: gap
+Espaço entre cards principais             .lista: gap
+
+Propriedades para personalização:
+
+- font-family: fonte.
+- font-size: tamanho do texto.
+- font-weight: espessura do texto (400 normal, 700 negrito).
+- color: cor do texto.
+- background: fundo.
+- text-transform: transformação de maiúsculas e minúsculas.
+- margin-top e margin-bottom: espaço externo acima e abaixo.
+- padding-top e padding-bottom: espaço interno acima e abaixo.
+- border-top e border-bottom: espessura, estilo e cor das linhas.
+
+Regras agrupadas alteram todos os seletores listados. Para personalizar apenas um elemento, use uma regra exclusiva dele. As regras dentro de @media (max-width: 480px) ajustam o visual em telas pequenas e podem sobrescrever propriedades das regras gerais.
 
 
 RESUMO DO FUNCIONAMENTO
